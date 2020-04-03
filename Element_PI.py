@@ -166,7 +166,7 @@ class PersImage(TransformerMixin):
             img = img.T[::-1]
             return img
         else:
-            print("Entering Variance Embedded PH")
+            #print("Entering Variance Embedded PH")
             spread = self.spread if self.spread else dx
             for point in landscape:
                 x_smooth = norm.cdf(xs_upper, point[0], point[2]*spread) - norm.cdf(
@@ -251,7 +251,7 @@ class PersImage(TransformerMixin):
             ax.axis("off")
             
 from elements import ELEMENTS
-def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+def VariancePersistv1(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxBD": 2, "minBD":0}, showplot=True):
     #Generate distance matrix and elementlist
     D,elements=Makexyzdistance(Filename)
     
@@ -281,7 +281,7 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxB
     #print (h1matrix)
     #combine them
     Totalmatrix=np.vstack((h0matrix,h1matrix))
-    pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs)
+    pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs, verbose=False)
     imgs = pim.transform(Totalmatrix)
     #print (imgs)
     
@@ -292,3 +292,40 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxB
 
                     #plt.show()
     #print (Totalmatrix)
+
+
+
+def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+    #Generate distance matrix and elementlist
+    D,elements=Makexyzdistance(Filename)
+   
+    #Generate data for persistence diagram
+    a=ripser(D,distance_matrix=True)
+    #Make the birth,death for h0 and h1
+    points=(a['dgms'][0][0:-1,1])
+    pointsh1=(a['dgms'][1])
+    diagrams = rips.fit_transform(D, distance_matrix=True)
+    #Find pair electronegativies
+    eleneg=list()
+    for index in points:
+        c=np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
+      #  print (index)
+      #  print (c)
+        eleneg.append(np.abs(ELEMENTS[elements[c[0]]].eleneg - ELEMENTS[elements[c[1]]].eleneg))
+   
+   
+    h0matrix=np.hstack(((diagrams[0][0:-1,:], np.reshape((((np.array(eleneg)*1.05)+.01)/10 ), (np.size(eleneg),1)))))
+    buffer=np.full((diagrams[1][:,0].size,1), 0.05)
+    h1matrix=np.hstack((diagrams[1],buffer))
+    #print (h0matrix)
+    #print (h1matrix)
+    #combine them
+    Totalmatrix=np.vstack((h0matrix,h1matrix))
+    pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs, verbose=False)
+    imgs = pim.transform(Totalmatrix)
+    #print (imgs)
+   
+    if showplot == True:
+        pim.show(imgs)
+        plt.show()
+    return np.array(imgs.flatten())
