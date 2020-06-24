@@ -1,0 +1,52 @@
+Hello Aaron (or whoever is building documentation),
+
+I have included in this file some information about how we're going to
+go about building the documentation. 
+
+1. How to edit the documentation
+
+	1) Go into docs/source and find the file (.rst suffix) you want to edit
+    	- index.rst is the home page of the file
+	2) Make your edits according to .rst syntax
+	3) Go to PersistentImages_Chemistry/helpers
+	4) Run ./update_docs.sh
+   		- May need to run “chmod +x update_docs.sh” before doing the above 
+		   (creates an executable)
+	5) git add docs
+ 	6) git commit -m “Some message about update”
+	7) git push origin master
+	8) Now you can go open the website on the GitHub
+
+2. Platform on which we are building documentation
+
+	- The platform that we're running on is called "Sphinx", and it's a 
+		documentation-building tool.
+		> For general info: https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html
+
+	- We edit files called rst files (stands for restructured text)
+		> These .rst files are compiled into HTML files through the command
+		   ran in the "docs" folder: make html (using a Makefile)
+		> You don't have to worry about compiling, this is what the shell script
+			does for us (update_docs.sh)
+
+	- The style for this documentation is in "classic" right now, which is a
+		style used in old-school Python documentation
+		> I think this is a pretty clean style, but if you feel like changing it,
+			let me know and we can take a look at it
+			- Link to style guide: https://www.sphinx-doc.org/en/1.8/theming.html
+		> The style is defined in the conf.py file in docs folder
+
+	- The index.html is the home page for the website
+		> If you want to view your changes without pushing to GitHub, you can
+			run "open docs/index.html" from the main directory or 
+			"open index.html" from the docs directory
+		> This page should link to all the other pages in the website
+
+	- Since we are editing in .rst files, we need to follow rst syntax or the 
+		compilation will not work (I've run into this problem a few times
+		already)
+		> Basic guide on syntax: https://pythonhosted.org/an_example_pypi_project/sphinx.html
+
+Please feel free to ask any questions!
+	
+	
