@@ -10,7 +10,7 @@ Installation
 
 Install this code by entering the following commands::
 
-   git clone <url>
+   git clone https://github.com/maroulaslab/PersistentImages_Chemistry.git
 
 Contents
 ========
@@ -18,7 +18,6 @@ Contents
    :maxdepth: 2
    
    pages/PI
-   
 
 
 

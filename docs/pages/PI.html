@@ -52,6 +52,82 @@
 <h2>Persistence Images<a class="headerlink" href="#persistence-images" title="Permalink to this headline">¶</a></h2>
 <img alt="../_images/whole_PI_diagram.png" src="../_images/whole_PI_diagram.png" />
 </div>
+<div class="section" id="generating-persistence-images">
+<h2>Generating Persistence Images<a class="headerlink" href="#generating-persistence-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="obtaining-data">
+<h3>Obtaining data<a class="headerlink" href="#obtaining-data" title="Permalink to this headline">¶</a></h3>
+<p>First, you need to obtain data to use as input for the generation of the PI.
+This library includes some preloaded data in the <em>babel</em> folder, and we will
+use this data here as an example. This folder contains x, y, and z coordinates
+for different compounds.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Element_PI</span> <span class="kn">import</span> <span class="n">VariancePersistv1</span>
+
+<span class="n">chem_data</span> <span class="o">=</span> <span class="s1">&#39;babel/1.xyz&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-hyperparameters">
+<h3>Setting Hyperparameters<a class="headerlink" href="#setting-hyperparameters" title="Permalink to this headline">¶</a></h3>
+<p>Next, we’ll need to set the hyperparameters for our PI. The arguments and hyperparameters for
+the PI-generating function, <code class="docutils literal notranslate"><span class="pre">VariancePersist</span></code> are described below:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">pixelx</span></code>, <code class="docutils literal notranslate"><span class="pre">pixely</span></code> := numeric values</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>These arguments correspond to the resolution of image</dt><dd><ul>
+<li><p>How dense do you want your grid on the PI to be?</p></li>
+<li><p>This is equivalent to the size of your output vector</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">myspread</span></code> := numeric value</dt><dd><ul class="simple">
+<li><p>This argument specifies your variance for the Gaussian kernel</p></li>
+<li><p>Higher <code class="docutils literal notranslate"><span class="pre">myspread</span></code> value accounts for more uncertainty in the PI</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">myspecs</span></code> := dictionary</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Form: <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:&lt;numeric</span> <span class="pre">value&gt;,</span> <span class="pre">&quot;minBD&quot;:&lt;numeric</span> <span class="pre">value&gt;}</span></code></dt><dd><ul>
+<li><p>The input for this argument must be specified in this form</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">showplot</span></code> := Boolean value</dt><dd><ul class="simple">
+<li><p>If you want to output the plot of your PI, <code class="docutils literal notranslate"><span class="pre">showplot</span> <span class="pre">=</span> <span class="pre">True</span></code></p></li>
+<li><p>If you want output suppressed, <code class="docutils literal notranslate"><span class="pre">showplot</span> <span class="pre">=</span> <span class="pre">False</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="running-the-function">
+<h3>Running the Function<a class="headerlink" href="#running-the-function" title="Permalink to this headline">¶</a></h3>
+<p>An example of generating a PI is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VariancePersist</span><span class="p">(</span><span class="n">Filename</span> <span class="o">=</span> <span class="s1">&#39;babel/1.xyz&#39;</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">myspread</span> <span class="o">=</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">myspecs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span> <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here is our output plot for this example:</p>
+<img alt="../_images/PI_example_variancepersist.png" src="../_images/PI_example_variancepersist.png" />
+</div>
+</div>
 </div>
 
 
@@ -67,6 +143,12 @@
 <li><a class="reference internal" href="#what-is-tda">What is TDA?</a></li>
 <li><a class="reference internal" href="#persistent-homology">Persistent Homology</a></li>
 <li><a class="reference internal" href="#persistence-images">Persistence Images</a></li>
+<li><a class="reference internal" href="#generating-persistence-images">Generating Persistence Images</a><ul>
+<li><a class="reference internal" href="#obtaining-data">Obtaining data</a></li>
+<li><a class="reference internal" href="#setting-hyperparameters">Setting Hyperparameters</a></li>
+<li><a class="reference internal" href="#running-the-function">Running the Function</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
