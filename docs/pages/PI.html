@@ -40,10 +40,11 @@
             
   <div class="section" id="persistent-images">
 <h1>Persistent Images<a class="headerlink" href="#persistent-images" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, we present a method for molecular representation that utilizes persistence homology to summarize a molecule's homological parts into a stable, machine-readable vector. This chemical representation is called a persistence image.</p>
+<p>In this tutorial, we present a method for molecular representation that utilizes persistence homology to summarize a molecule's homological parts into a stable, machine-readable vector. This chemical representation is called a persistence image, a tool of persistence homology.</p>
 <div class="section" id="what-is-tda">
-<h2>What is TDA?<a class="headerlink" href="#what-is-tda" title="Permalink to this headline">¶</a></h2>
-<p>Topology is a branch of mathematics that analyzes shape and important characteristics of an object. In topological data analysis, we apply these techniques to the shape and important characteristics of a data set. One such technique is persistent homology, which tracks the appearance and disappearance of homological features such as connected components and holes. These features appear in a topological descriptor called persistence diagrams containing the evolution of the connected components and holes from birth to death. A persistence diagram can then be converted to a finite-dimensional version of itself.</p>
+<h2>How do we use Persistence Homology?<a class="headerlink" href="#what-is-tda" title="Permalink to this headline">¶</a></h2>
+<p>Topology is a branch of mathematics that analyzes the shape and important characteristics of an object. In topological data analysis, we apply these techniques to the shape and important characteristics of a data set. One such technique is persistent homology, which tracks the appearance and disappearance of homological features such as connected components and holes. These features appear in a topological descriptor called persistence diagrams (PD) containing the evolution of the connected components and holes from birth to death. A persistence diagram can then be converted to a finite-dimensional version of itself called a persistence image. </p>
+<p>We first produce a persistence diagram. In this case, we consider a chemical molecule represented in the xyz plane where each point represents an atom. We superimposed spheres of increasing radius centered at each atom. As these spheres incrementally increase, they begin to intersect with each other creating connected components and holes. Connected components and holes represent the interatomic distances as well as molecular attributes such as rings and groups respectively.</p>
 </div>
 <div class="section" id="persistent-homology">
 <h2>Persistent Homology<a class="headerlink" href="#persistent-homology" title="Permalink to this headline">¶</a></h2>
