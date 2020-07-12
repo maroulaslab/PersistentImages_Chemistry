@@ -24,9 +24,10 @@ Obtaining data
 First, you need to obtain data to use as input for the generation of the PI. 
 This library includes some preloaded data in the *babel* folder, and we will
 use this data here as an example. This folder contains x, y, and z coordinates
-for different compounds.::
+for different compounds. In this example, we will load in data for a pyridine 
+molecule.::
 
-    from Element_PI import VariancePersistv1
+    from Element_PI import VariancePersist
     
     chem_data = 'babel/1.xyz'
 
