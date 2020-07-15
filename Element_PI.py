@@ -329,3 +329,26 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxB
         pim.show(imgs)
         plt.show()
     return np.array(imgs.flatten())
+
+
+def PersDiagram(xyz, lifetime=True):
+    plt.rcParams["font.family"] = "Times New Roman"
+    D,elements=Makexyzdistance(xyz)
+    data=ripser(D,distance_matrix=True)
+    rips = Rips()
+    rips.transform(D, distance_matrix=True)
+    rips.dgms_[0]=rips.dgms_[0][0:-1]
+    rips.plot(show=False, lifetime=lifetime, labels=['Connected Components','Holes'])
+    L = plt.legend()
+    plt.setp(L.texts, family="Times New Roman")
+    plt.rcParams["font.family"] = "Times New Roman"
+
+def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={"maxBD": 3, "minBD":-0.1}):
+    X=VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
+    pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=bounds, verbose=False)
+
+    img=X.reshape(pixelx,pixely)
+    pim.show(img)
+    if savefile==True:
+        plt.imsave(xyz+'_img.png',img, cmap=plt.get_cmap("plasma"), dpi=200)
+
