@@ -23,7 +23,7 @@
     
   <link rel="index" title="Index" href="../genindex.html" />
   <link rel="search" title="Search" href="../search.html" />
-  <link rel="next" title="Guide to Data" href="Data_Guide.html" />
+  <link rel="next" title="About" href="about.html" />
   <link rel="prev" title="PersistentImages_Chemistry Documentation:" href="../index.html" /> 
   </head>
 
@@ -70,7 +70,7 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="../index.html#contents">contents</a></span>
+        <span class="caption-text"><a href="../index.html#installation">Contents</a></span>
       </p>
       <ul class="current">
         
@@ -88,7 +88,7 @@
           </li>
 
         
-          <li class="toctree-l1 "><a href="Data_Guide.html" class="reference internal ">Guide to Data</a>
+          <li class="toctree-l1 "><a href="about.html" class="reference internal ">About</a>
 
             
           </li>
@@ -116,8 +116,8 @@
        title="previous chapter">← PersistentImages_Chemistry Documentation:</a>
   </li>
   <li class="next">
-    <a href="Data_Guide.html"
-       title="next chapter">Guide to Data →</a>
+    <a href="about.html"
+       title="next chapter">About →</a>
   </li>
 </ul>
   
@@ -127,21 +127,71 @@
             
   <div class="section" id="persistent-images">
 <h1>Persistent Images<a class="headerlink" href="#persistent-images" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, we present a method for molecular representation that utilizes persistence homology to summarize a molecule’s homological parts into a stable, machine-readable vector. This chemical representation is called a persistence image, a tool of persistence homology.</p>
+<p>In this tutorial, we present a method for molecular representation
+that utilizes persistence homology to summarize a molecule’s
+homological parts into a stable, machine-readable vector. This
+chemical representation is called a persistence image, a tool of
+persistence homology.</p>
 <div class="section" id="what-is-topological-data-analysis">
 <h2>What is Topological Data Analysis?<a class="headerlink" href="#what-is-topological-data-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Topology is a branch of mathematics that analyzes the shape and important characteristics of an object. In topological data analysis (TDA), we apply these techniques to the shape and important characteristics of a data set. One such technique is persistent homology, which tracks the appearance and disappearance of homological features such as connected components and holes. These features appear in a topological descriptor called persistence diagrams (PD) containing the evolution of the connected components and holes from birth to death. A PD can then be converted to a finite-dimensional version of itself called a persistence image (PI). We outline the steps from molecular structure to PI in the next two sections.</p>
+<p>Topology is a branch of mathematics that analyzes the shape and
+important characteristics of an object. In topological data analysis
+(TDA), we apply these techniques to the shape and important
+characteristics of a data set. One such technique is persistent
+homology, which tracks the appearance and disappearance of homological
+features such as connected components and holes. These features appear
+in a topological descriptor called persistence diagrams (PD)
+containing the evolution of the connected components and holes from
+birth to death. A PD can then be converted to a finite-dimensional
+version of itself called a persistence image (PI). We outline the steps
+from molecular structure to PI in the next two sections.</p>
 <div class="section" id="converting-molecular-structures-to-persistence-diagrams">
 <h3>Converting Molecular Structures to Persistence Diagrams<a class="headerlink" href="#converting-molecular-structures-to-persistence-diagrams" title="Permalink to this headline">¶</a></h3>
-<p>We first produce a PD. In this case, we consider a chemical molecule represented in the xyz plane where each point represents an atom. We superimposed spheres of increasing radius centered at each atom. As these spheres incrementally increase, they begin to intersect with each other creating connected components and holes. Connected components and holes represent the interatomic distances as well as molecular attributes such as rings and groups respectively.</p>
+<p>We first produce a PD. In this case, we consider a chemical molecule
+represented in the xyz plane where each point represents an atom.
+We superimposed spheres of increasing radius centered at each atom.
+As these spheres incrementally increase, they begin to intersect with
+each other creating connected components and holes. Connected
+components and holes represent the interatomic distances as well as
+molecular attributes such as rings and groups respectively.</p>
 <img alt="../_images/anisole_growing_radius_full.png" src="../_images/anisole_growing_radius_full.png" />
-<p>In the figure above, we see the process by which a persistence diagram is generated for the molecule anisole. (a) The atoms of anisole are placed in the xyz plane (top) and each connected component is born at time birth=0 as represented by the vertical orange lines (middle), which has a corresponding PD (bottom). (b) As the radius of each sphere superimposed on each atom doubles, we see all connected components have persisted, which is represented by the lengthened orange lines (middle) and the heightened persistence of each point in the PD (bottom). (c) Again, the radii are increased; however, this time some radii intersect (top). This signifies the death of as many connected components as there are intersections, finalizing those points in the PD as well as the birth of a hole generated by 6 carbon atoms of the phenyl group represented by the blue line (middle) and blue triangle (bottom). (d) More connected components die as the increasing radii intersect while the hole still persists. (e) A second hole is created by the interaction between the methoxyl group and two carbons of the phenyl group (top). This hole as well as the previous hole die, leaving just one connected component (middle) that will never die as it has nothing left to intersect with. This last connected component is never represented in the PD.</p>
+<p>In the figure above, we see the process by which a persistence diagram
+is generated for the molecule anisole.</p>
+<p><strong>(a)</strong> The atoms of anisole are
+placed in the xyz plane (top) and each connected component is born at
+time birth=0 as represented by the vertical orange lines (middle),
+which has a corresponding PD (bottom).</p>
+<p><strong>(b)</strong> As the radius of each sphere
+superimposed on each atom doubles, we see all connected components have
+persisted, which is represented by the lengthened orange lines (middle)
+and the heightened persistence of each point in the PD (bottom).</p>
+<p><strong>(c)</strong>
+Again, the radii are increased; however, this time some radii intersect
+(top). This signifies the death of as many connected components as there
+are intersections, finalizing those points in the PD as well as the
+birth of a hole generated by 6 carbon atoms of the phenyl group
+represented by the blue line (middle) and blue triangle (bottom).</p>
+<p><strong>(d)</strong>
+More connected components die as the increasing radii intersect while
+the hole still persists.</p>
+<p><strong>(e)</strong> A second hole is created by the interaction
+between the methoxyl group and two carbons of the phenyl group (top).
+This hole as well as the previous hole die, leaving just one connected
+component (middle) that will never die as it has nothing left to
+intersect with. This last connected component is never represented in
+the PD.</p>
 </div>
 <div class="section" id="converting-persistence-diagrams-to-persistent-images">
 <h3>Converting Persistence Diagrams to Persistent Images<a class="headerlink" href="#converting-persistence-diagrams-to-persistent-images" title="Permalink to this headline">¶</a></h3>
 <p>Now that we have converted molecules to PDs, we look to create vectorized, machine-readable persistence images. We do this by placing a Gaussian kernel on each persistence point in the PD. This, along with a variable, weighing function, which gives us control over what persistence points we want to give more significance, creates a pixelized version of our PD. The multiplicity of each atom in our molecule is represented by the intensity of the pixels. This surface is then transferred to pixel values that encode the persistence surface. This method yields variability issues as it is possible for two molecules with the same geometries to yield the same PIs. To mitigate this, we describe the variance of the gaussian kernel with pairwise electronegativity differences of the atoms.</p>
 <img alt="../_images/whole_PI_diagram.png" src="../_images/whole_PI_diagram.png" />
-<p>In the figure above, (a) we take the PD that we generated from Figure 1 and compute the PIs for its (b) connected components and (c) holes. Additionally, The PIs of (d) HBr and (e) F2 without incorporating the electronegativity differences are shown by (f) and (g) respectively. However, by factoring in the pairwise electronegativity differences for HBr in (h) and F2 in (i) we create distinctive PIs.</p>
+<p>In the figure above, <strong>(a)</strong> we take the PD that we generated from
+Figure 1 and compute the PIs for its <strong>(b)</strong> connected components and
+<strong>(c)</strong> holes. Additionally, The PIs of <strong>(d)</strong> HBr and <strong>(e)</strong> F2 without
+incorporating the electronegativity differences are shown by <strong>(f)</strong>
+and <strong>(g)</strong> respectively. However, by factoring in the pairwise
+electronegativity differences for HBr in <strong>(h)</strong> and F2 in <strong>(i)</strong> we
+create distinctive PIs.</p>
 </div>
 </div>
 <div class="section" id="generating-persistence-images">
@@ -162,9 +212,8 @@ molecule.:</p>
 <div class="section" id="setting-hyperparameters">
 <h3>Setting Hyperparameters<a class="headerlink" href="#setting-hyperparameters" title="Permalink to this headline">¶</a></h3>
 <p>Next, we’ll need to set the hyperparameters for our PI. The arguments and hyperparameters for
-the PI-generating function, <code class="docutils literal notranslate"><span class="pre">VariancePersist</span></code> are described below:</p>
-<blockquote>
-<div><ol class="arabic simple">
+the PI-generating function, <code class="docutils literal notranslate"><span class="pre">VariancePersist</span></code> are described below.</p>
+<ol class="arabic simple">
 <li><dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">pixelx</span></code>, <code class="docutils literal notranslate"><span class="pre">pixely</span></code> := numeric values</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -189,13 +238,8 @@ the PI-generating function, <code class="docutils literal notranslate"><span cla
 </li>
 <li><dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">myspecs</span></code> := dictionary</dt><dd><ul class="simple">
-<li><dl class="simple">
-<dt>Form: <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:&lt;numeric</span> <span class="pre">value&gt;,</span> <span class="pre">&quot;minBD&quot;:&lt;numeric</span> <span class="pre">value&gt;}</span></code></dt><dd><ul>
+<li><p>Form: <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:&lt;numeric</span> <span class="pre">value&gt;,</span> <span class="pre">&quot;minBD&quot;:&lt;numeric</span> <span class="pre">value&gt;}</span></code></p></li>
 <li><p>The input for this argument must be specified in this form</p></li>
-</ul>
-</dd>
-</dl>
-</li>
 </ul>
 </dd>
 </dl>
@@ -209,7 +253,6 @@ the PI-generating function, <code class="docutils literal notranslate"><span cla
 </dl>
 </li>
 </ol>
-</div></blockquote>
 </div>
 <div class="section" id="running-the-function">
 <h3>Running the Function<a class="headerlink" href="#running-the-function" title="Permalink to this headline">¶</a></h3>
@@ -232,13 +275,13 @@ the PI-generating function, <code class="docutils literal notranslate"><span cla
        title="previous chapter">← PersistentImages_Chemistry Documentation:</a>
   </li>
   <li class="next">
-    <a href="Data_Guide.html"
-       title="next chapter">Guide to Data →</a>
+    <a href="about.html"
+       title="next chapter">About →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>

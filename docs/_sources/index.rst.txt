@@ -1,5 +1,5 @@
 PersistentImages_Chemistry Documentation:
-=========================================
+*****************************************
 
 .. image:: /_images/anisole_radius_growth.png
 
@@ -20,17 +20,15 @@ Installation
 
 Install this code by entering the following commands::
 
-   git clone https://github.com/maroulaslab/PersistentImages_Chemistry.git
+   git clone https://gitlab.com/voglab/PersistentImages_Chemistry.git
 
 
-Contents
-========
 .. toctree::
    :maxdepth: 2
+   :caption: Contents
    
    pages/PI
-   pages/Data_Guide
-
+   pages/about
 
 
 Indices and tables
