@@ -6,14 +6,13 @@ PersistentImages_Chemistry Documentation:
 The PersistentImages_Chemistry repository contains tools to create
 persistence images (PI) to encode geometric data of chemical structures
 for use in machine learning applications. An overview of PI's and a 
-basic tutorial of generating a persistence image is included in 
+basic tutorial of generating a persistent diagram and a persistence image is included in 
 `this tutorial <https://maroulaslab.github.io/PersistentImages_Chemistry/pages/PI.html>`_.
 
 The source code for this repository can be found in the
 `original repository <https://gitlab.com/voglab/PersistentImages_Chemistry>`_. 
 
-You can download the original paper at this link: 
-:download:`Original Chemistry PI Paper</references/Townsend20_MolecularRepresentation_R02_NoMarkUp.pdf>`
+You can download the original paper `here <https://www.nature.com/articles/s41467-020-17035-5.pdf>`_.
 
 Installation
 ============
