@@ -78,24 +78,31 @@ and **(g)** respectively. However, by factoring in the pairwise
 electronegativity differences for HBr in **(h)** and F2 in **(i)** we 
 create distinctive PIs.
 
-Generating Persistence Images
------------------------------
+Generating Persistence Diagrams and Persistence Diagrams
+--------------------------------------------------------
 
 Obtaining data
 ^^^^^^^^^^^^^^
 
-First, you need to obtain data to use as input for the generation of the PI. 
+First, you need to obtain data to use as input for the generation of the PD and PI. 
 This library includes some preloaded data in the *babel* folder, and we will
 use this data here as an example. This folder contains x, y, and z coordinates
 for different compounds. In this example, we will load in data for a pyridine 
 molecule.::
 
+    from Element_PI import PersDiagram
     from Element_PI import VariancePersist
     
     chem_data = 'babel/1.xyz'
 
 Setting Hyperparameters
 ^^^^^^^^^^^^^^^^^^^^^^^
+First, we'll set the hyperparameter for our PD. The hyperparameter for 
+the PD-generating function, ``PersDiagram`` are described below.
+
+1. ``Lifetime`` := Boolean value
+    -If you want to plot birth vs death on the PD, ``Lifetime = False``
+    -If you want to plot birth vs persistence on the PD, ``Lifetime = True``
 
 Next, we'll need to set the hyperparameters for our PI. The arguments and hyperparameters for 
 the PI-generating function, ``VariancePersist`` are described below.
@@ -114,8 +121,16 @@ the PI-generating function, ``VariancePersist`` are described below.
     - If you want to output the plot of your PI, ``showplot = True``
     - If you want output suppressed, ``showplot = False``
 
-Running the Function
-^^^^^^^^^^^^^^^^^^^^
+
+Running the Functions
+^^^^^^^^^^^^^^^^^^^^^
+An example of generating a PD is shown below::
+
+    PersDiagram('babel/1.xyz, lifetime = False)
+
+Here is our output plot for this example:
+
+.. image:: /_images/persistence_diagram_example.png
 
 An example of generating a PI is shown below::
 
