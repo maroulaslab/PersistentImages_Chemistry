@@ -26,8 +26,7 @@ Install this code by entering the following commands::
    :maxdepth: 2
    :caption: Contents
    
-   pages/PI
-   pages/about
+   
 
 
 Indices and tables
@@ -36,3 +35,12 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   pages/PI
+   API/API_index
+   pages/about
+

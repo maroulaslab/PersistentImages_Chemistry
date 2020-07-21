@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Element_PI module</title>
+    
+      <link rel="stylesheet" href="../_static/pygments.css">
+      <link rel="stylesheet" href="../_static/theme.css">
+      <link rel="stylesheet" href="../_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+
+      
+      <script src="../_static/theme-vendors.js"></script>
+      <script src="../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../genindex.html" />
+  <link rel="search" title="Search" href="../search.html" />
+  <link rel="next" title="About" href="../pages/about.html" />
+  <link rel="prev" title="PersistentImages_Chemistry API" href="API_index.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../index.html" class="home-link">
+    
+      <span class="site-name">Persistent Images for Chemistry</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../index.html#installation"
+         class="nav-link ">
+         Contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#indices-and-tables"
+         class="nav-link ">
+         indices and tables
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../index.html#installation"
+         class="nav-link ">
+         Contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../index.html#indices-and-tables"
+         class="nav-link ">
+         indices and tables
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#installation">Contents</a></span>
+      </p>
+      <ul class="">
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../index.html#indices-and-tables">indices and tables</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../pages/PI.html" class="reference internal ">Persistent Images</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="API_index.html" class="reference internal ">PersistentImages_Chemistry API</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../pages/about.html" class="reference internal ">About</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="API_index.html">PersistentImages_Chemistry API</a> &raquo;</li>
+    
+    <li><code class="docutils literal notranslate"><span class="pre">Element_PI</span></code> module</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="API_index.html"
+       title="previous chapter">← PersistentImages_Chemistry API</a>
+  </li>
+  <li class="next">
+    <a href="../pages/about.html"
+       title="next chapter">About →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="element-pi-module">
+<h1><code class="docutils literal notranslate"><span class="pre">Element_PI</span></code> module<a class="headerlink" href="#element-pi-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 43%" />
+<col style="width: 57%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#variancepersist"><span class="std std-ref">VariancePersist</span></a></p></td>
+<td><p>Generates a persistence image with electronegativity scaling</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#variancepersistv1"><span class="std std-ref">VariancePersistv1</span></a></p></td>
+<td><p>Generates a persistence image without electronegativity scaling</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#generatepi"><span class="std std-ref">GeneratePI</span></a></p></td>
+<td><p>Outputs a visual representation of a persistence image</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#persdiagram"><span class="std std-ref">PersDiagram</span></a></p></td>
+<td><p>Graphs a persistence diagram</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#makexyzdistance"><span class="std std-ref">Makexyzdistance</span></a></p></td>
+<td><p>Reads compound data file and generates distance matrix</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="objects">
+<h3>Objects<a class="headerlink" href="#objects" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 51%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#persimage"><span class="std std-ref">PersImage</span></a></p></td>
+<td><p>Persistence images generator</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="element-pi-variancepersist">
+<span id="variancepersist"></span><h2>Element_PI.VariancePersist<a class="headerlink" href="#element-pi-variancepersist" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PI_vector</span> <span class="o">=</span> <span class="n">VariancePersist</span><span class="p">(</span><span class="n">Filename</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">myspread</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">myspecs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><dl class="simple">
+<dt><strong>Filename</strong>: string</dt><dd><p>Name of file with chemical data to read</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>pixelx</strong>: int, optional</dt><dd><p>Number of pixels on x-axis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>pixely</strong>: int, optional</dt><dd><p>Number of pixels on y-axis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>myspread</strong>: int, optional</dt><dd><p>Parameter for kernel
+For Gaussian kernel, this specifies variance</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>myspecs</strong>: dictiouary, optional</dt><dd><dl class="simple">
+<dt>Format: <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:</span> <span class="pre">&lt;int&gt;,</span> <span class="pre">&quot;minBD&quot;:</span> <span class="pre">&lt;int&gt;}</span></code></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;maxBD&quot;</span></code>: float</dt><dd><ul>
+<li><p>Specifies</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;minBD&quot;</span></code>: float</dt><dd><ul>
+<li><p>Specifies</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>showplot</strong>: bool, optional</dt><dd><p>Specifies whether to show the plot of the generated persistence image</p>
+<dl class="simple">
+<dt>Options:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: show the plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: do not show the plot</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>PI_vector</strong>: numpy array</dt><dd><p>The vector representation of the persistence image.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="element-pi-variancepersistv1">
+<span id="variancepersistv1"></span><h2>Element_PI.VariancePersistv1<a class="headerlink" href="#element-pi-variancepersistv1" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PI_vector</span> <span class="o">=</span> <span class="n">VariancePersistv1</span><span class="p">(</span><span class="n">Filename</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">myspread</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">myspecs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span> <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id1">
+<h3>Parameters:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><dl class="simple">
+<dt><strong>Filename</strong>: string</dt><dd><p>Name of file with chemical data to read</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>pixelx</strong>: int, optional</dt><dd><p>Number of pixels on x-axis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>pixely</strong>: int, optional</dt><dd><p>Number of pixels on y-axis</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>myspread</strong>: int or float, optional</dt><dd><p>Parameter for kernel
+For Gaussian kernel, this specifies variance</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>myspecs</strong>: dictiouary, optional</dt><dd><dl class="simple">
+<dt>Format: <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:</span> <span class="pre">&lt;int&gt;,</span> <span class="pre">&quot;minBD&quot;:</span> <span class="pre">&lt;int&gt;}</span></code></dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;maxBD&quot;</span></code>: float</dt><dd><ul>
+<li><p>Specifies</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">&quot;minBD&quot;</span></code>: float</dt><dd><ul>
+<li><p>Specifies</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>showplot</strong>: bool, optional</dt><dd><p>Specifies whether to show the plot of the generated persistence image</p>
+<dl class="simple">
+<dt>Options:</dt><dd><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: show the plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: do not show the plot</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="id2">
+<h3>Returns:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>PI_vector</strong>: numpy array</dt><dd><p>The vector representation of the persistence image.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="element-pi-generatepi">
+<span id="generatepi"></span><h2>Element_PI.GeneratePI<a class="headerlink" href="#element-pi-generatepi" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GeneratePI</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">savefile</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">myspread</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="section" id="id3">
+<h3>Parameters:<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>xyz: string</p></li>
+<li><p>savefile: bool</p></li>
+<li><p>pixelx: int</p></li>
+<li><p>pixely: int</p></li>
+</ol>
+<p># myspread: int or float</p>
+<ol class="arabic simple">
+<li><p>bounds: dictionary</p></li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h3>Returns:<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>Shows a persistence image in the user’s screen, and saves a copy of this persistence image
+visualization to the user’s local directory.</p>
+</div>
+</div>
+<div class="section" id="element-pi-persdiagram">
+<span id="persdiagram"></span><h2>Element_PI.PersDiagram<a class="headerlink" href="#element-pi-persdiagram" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PersDiagram</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">lifetime</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="section" id="id5">
+<h3>Parameters:<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><strong>xyz</strong>: string</dt><dd><p>Name of file with chemical data to read</p>
+</dd>
+</dl>
+</li>
+<li><p><strong>lifetime</strong>: bool, optional</p></li>
+</ol>
+</div>
+<div class="section" id="id6">
+<h3>Returns:<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="element-pi-makexyzdistance">
+<span id="makexyzdistance"></span><h2>Element_PI.Makexyzdistance<a class="headerlink" href="#element-pi-makexyzdistance" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="element-pi-persimage">
+<span id="persimage"></span><h2>Element_PI.PersImage<a class="headerlink" href="#element-pi-persimage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="member-functions">
+<h3>Member Functions<a class="headerlink" href="#member-functions" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="member-variables">
+<h3>Member Variables<a class="headerlink" href="#member-variables" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="API_index.html"
+       title="previous chapter">← PersistentImages_Chemistry API</a>
+  </li>
+  <li class="next">
+    <a href="../pages/about.html"
+       title="next chapter">About →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>
