@@ -122,7 +122,7 @@
                 
                   <li class="toctree-l2"><a href="#what-is-topological-data-analysis" class="reference internal">What is Topological Data Analysis?</a></li>
                 
-                  <li class="toctree-l2"><a href="#generating-persistence-images" class="reference internal">Generating Persistence Images</a></li>
+                  <li class="toctree-l2"><a href="#generating-persistence-diagrams-and-persistence-diagrams" class="reference internal">Generating Persistence Diagrams and Persistence Diagrams</a></li>
                 
               </ul>
             
@@ -241,16 +241,17 @@ electronegativity differences for HBr in <strong>(h)</strong> and F2 in <strong>
 create distinctive PIs.</p>
 </div>
 </div>
-<div class="section" id="generating-persistence-images">
-<h2>Generating Persistence Images<a class="headerlink" href="#generating-persistence-images" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generating-persistence-diagrams-and-persistence-diagrams">
+<h2>Generating Persistence Diagrams and Persistence Diagrams<a class="headerlink" href="#generating-persistence-diagrams-and-persistence-diagrams" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="obtaining-data">
 <h3>Obtaining data<a class="headerlink" href="#obtaining-data" title="Permalink to this headline">¶</a></h3>
-<p>First, you need to obtain data to use as input for the generation of the PI.
+<p>First, you need to obtain data to use as input for the generation of the PD and PI.
 This library includes some preloaded data in the <em>babel</em> folder, and we will
 use this data here as an example. This folder contains x, y, and z coordinates
 for different compounds. In this example, we will load in data for a pyridine
 molecule.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Element_PI</span> <span class="kn">import</span> <span class="n">VariancePersist</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Element_PI</span> <span class="kn">import</span> <span class="n">PersDiagram</span>
+<span class="kn">from</span> <span class="nn">Element_PI</span> <span class="kn">import</span> <span class="n">VariancePersist</span>
 
 <span class="n">chem_data</span> <span class="o">=</span> <span class="s1">&#39;babel/1.xyz&#39;</span>
 </pre></div>
@@ -258,6 +259,16 @@ molecule.:</p>
 </div>
 <div class="section" id="setting-hyperparameters">
 <h3>Setting Hyperparameters<a class="headerlink" href="#setting-hyperparameters" title="Permalink to this headline">¶</a></h3>
+<p>First, we’ll set the hyperparameter for our PD. The hyperparameter for
+the PD-generating function, <code class="docutils literal notranslate"><span class="pre">PersDiagram</span></code> are described below.</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Lifetime</span></code> := Boolean value</dt><dd><p>-If you want to plot birth vs death on the PD, <code class="docutils literal notranslate"><span class="pre">Lifetime</span> <span class="pre">=</span> <span class="pre">False</span></code>
+-If you want to plot birth vs persistence on the PD, <code class="docutils literal notranslate"><span class="pre">Lifetime</span> <span class="pre">=</span> <span class="pre">True</span></code></p>
+</dd>
+</dl>
+</li>
+</ol>
 <p>Next, we’ll need to set the hyperparameters for our PI. The arguments and hyperparameters for
 the PI-generating function, <code class="docutils literal notranslate"><span class="pre">VariancePersist</span></code> are described below.</p>
 <ol class="arabic simple">
@@ -301,8 +312,14 @@ the PI-generating function, <code class="docutils literal notranslate"><span cla
 </li>
 </ol>
 </div>
-<div class="section" id="running-the-function">
-<h3>Running the Function<a class="headerlink" href="#running-the-function" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="running-the-functions">
+<h3>Running the Functions<a class="headerlink" href="#running-the-functions" title="Permalink to this headline">¶</a></h3>
+<p>An example of generating a PD is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PersDiagram</span><span class="p">(</span><span class="s1">&#39;babel/1.xyz, lifetime = False)</span>
+</pre></div>
+</div>
+<p>Here is our output plot for this example:</p>
+<img alt="../_images/persistence_diagram_example.png" src="../_images/persistence_diagram_example.png" />
 <p>An example of generating a PI is shown below:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VariancePersist</span><span class="p">(</span><span class="n">Filename</span> <span class="o">=</span> <span class="s1">&#39;babel/1.xyz&#39;</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">myspread</span> <span class="o">=</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">myspecs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span> <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 </pre></div>
