@@ -7,30 +7,50 @@ import collections
 from itertools import product
 import collections
 import pandas as pd
-import numpy as np
 from scipy.stats import multivariate_normal as mvn
 from scipy.stats import norm
 import scipy.spatial as spatial
 import matplotlib.pyplot as plt
 
-
+from elements import ELEMENTS
 
 
 def Makexyzdistance(t):
-    element=np.loadtxt(t,dtype=str,usecols=(0,), skiprows=2)
-    x=np.loadtxt(t,dtype=float,usecols=(1), skiprows=2)
-    y=np.loadtxt(t,dtype=float,usecols=(2),skiprows=2)
-    z=np.loadtxt(t,dtype=float,usecols=(3),skiprows=2)
+    '''
+    distance, element = Makexyzdistance(t)
 
-   #print (x)
-   #def Distance(x):
-    Distance=np.zeros(shape=(len(x),len(x)))
-    for i in range(0,len(x)):
+    Purpose: Reads in x, y, z data for atoms in a chemical 
+    compound and returns their distances and the name of the compound.
+
+    Parameters:
+    -----------
+    t: name of source file for coordinate data for a compound
+        - See documentation's specifications for file structure
+        - File contains x, y, z coordinates for each atom in compound
+
+    Return Values:
+    --------------
+    Distance: distance matrix for every atom in the compound
+
+    element: name of the element being read 
+    '''
+    element = np.loadtxt(t, dtype=str, usecols=(0,), skiprows=2)
+    x = np.loadtxt(t, dtype=float, usecols=(1), skiprows=2)
+    y = np.loadtxt(t, dtype=float, usecols=(2), skiprows=2)
+    z = np.loadtxt(t, dtype=float, usecols=(3), skiprows=2)
+
+    # Initialize distance matrix
+    Distance = np.zeros(shape = (len(x),len(x)))
+
+    for i in range(0, len(x)): # Fill distance matrix
+
        # Make an array for each atom
-        for j in range(0,len(x)):
-        #Calculate the distance between every atom
+        for j in range(0, len(x)):
 
-            Distance[i][j]=np.sqrt(  ((x[i]-x[j])**2)  + ((y[i]-y[j])**2)  + ((z[i]-z[j]) **2)  )
+        #Calculate the distance between every atom
+            Distance[i][j] = np.sqrt(  ((x[i]-x[j])**2)  + ((y[i]-y[j])**2)  \
+                + ((z[i]-z[j]) **2)  )
+
     return [Distance, element]
 
 __all__ = ["PersImage"]
@@ -85,7 +105,7 @@ class PersImage(TransformerMixin):
         self.spread = spread
         self.nx, self.ny = pixels
 
-        if verbose:
+        if verbose: # Prints parameters for user to see if verbose
             print(
                 'PersImage(pixels={}, spread={}, specs={}, kernel_type="{}", weighting_type="{}")'.format(
                     pixels, spread, specs, kernel_type, weighting_type
@@ -99,31 +119,39 @@ class PersImage(TransformerMixin):
         -----------
 
         diagrams : list of or singleton diagram, list of pairs. [(birth, death)]
-            Persistence diagrams to be converted to persistence images. It is assumed they are in (birth, death) format. Can input a list of diagrams or a single diagram.
-
+            - Persistence diagrams to be converted to persistence images. 
+            - It is assumed they are in (birth, death) format. 
+            - Can input a list of diagrams or a single diagram.
         """
+
         # if diagram is empty, return empty image
         if len(diagrams) == 0:
             return np.zeros((self.nx, self.ny))
-        # if first entry of first entry is not iterable, then diagrams is singular and we need to make it a list of diagrams
+
+        # if first entry of first entry is not iterable, then diagrams is 
+        #   singular and we need to make it a list of diagrams
         try:
             singular = not isinstance(diagrams[0][0], collections.Iterable)
         except IndexError:
             singular = False
 
-        if singular:
+        if singular: # Make diagrams into a list of diagrams
             diagrams = [diagrams]
 
+        # Copy diagrams to avoid changing original input
         dgs = [np.copy(diagram) for diagram in diagrams]
+
+        # Converts each diagram to langscapes
         landscapes = [PersImage.to_landscape(dg) for dg in dgs]
 
-        if not self.specs:
+        if not self.specs: # Set specs for diagram if not given
             self.specs = {
                 "maxBD": np.max([np.max(np.vstack((landscape, np.zeros((1, 2))))) 
                                  for landscape in landscapes] + [0]),
                 "minBD": np.min([np.min(np.vstack((landscape, np.zeros((1, 2))))) 
                                  for landscape in landscapes] + [0]),
             }
+
         imgs = [self._transform(dgm) for dgm in landscapes]
 
         # Make sure we return one item.
@@ -133,6 +161,7 @@ class PersImage(TransformerMixin):
         return imgs
 
     def _transform(self, landscape):
+
         # Define an NxN grid over our landscape
         maxBD = self.specs["maxBD"]
         minBD = min(self.specs["minBD"], 0)  # at least show 0, maybe lower
@@ -149,7 +178,7 @@ class PersImage(TransformerMixin):
 
         # Define zeros
         img = np.zeros((self.nx, self.ny))
-        #print (landscape)
+        
         # Implement this as a `summed-area table` - it'll be way faster
         
         if np.size(landscape,1) == 2:
@@ -166,7 +195,6 @@ class PersImage(TransformerMixin):
             img = img.T[::-1]
             return img
         else:
-            #print("Entering Variance Embedded PH")
             spread = self.spread if self.spread else dx
             for point in landscape:
                 x_smooth = norm.cdf(xs_upper, point[0], point[2]*spread) - norm.cdf(
@@ -219,30 +247,41 @@ class PersImage(TransformerMixin):
     def kernel(self, spread=1):
         """ This will return whatever kind of kernel we want to use.
             Must have signature (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1
+
+        Parameters:
+        -----------
+        spread: variance/covariance for the kernel
         """
         # TODO: use self.kernel_type to choose function
 
         def gaussian(data, pixel):
-            return mvn.pdf(data, mean=pixel, cov=spread)
+            return mvn.pdf(data, mean = pixel, cov = spread)
 
         return gaussian
 
     @staticmethod
     def to_landscape(diagram):
         """ Convert a diagram to a landscape
-            (b,d) -> (b, d-b)
+            (birth, death) -> (birth, death-birth)
         """
         diagram[:, 1] -= diagram[:, 0]
 
         return diagram
 
     def show(self, imgs, ax=None):
-        """ Visualize the persistence image
-
+        """ 
+        Visualize the persistence image
+        
+        Parameters:
+        -----------
+        imgs: persistence images to show
+        ax: Axes for a pyplot
+            - Providing this is optional
         """
 
-        ax = ax or plt.gca()
+        ax = ax or plt.gca() # Get current axis if none is given
 
+        # Need to convert imgs into a list if not already
         if type(imgs) is not list:
             imgs = [imgs]
 
@@ -250,80 +289,78 @@ class PersImage(TransformerMixin):
             ax.imshow(img, cmap=plt.get_cmap("plasma"))
             ax.axis("off")
             
-from elements import ELEMENTS
-def VariancePersistv1(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+
+def VariancePersistv1(Filename, pixelx = 100, pixely = 100, myspread = 2, 
+                        myspecs = {"maxBD": 2, "minBD": 0}, showplot = True):
     #Generate distance matrix and elementlist
-    D,elements=Makexyzdistance(Filename)
+    D,elements = Makexyzdistance(Filename)
     
     #Generate data for persistence diagram
-    a=ripser(D,distance_matrix=True)
+    a = ripser(D,distance_matrix=True)
+
     #Make the birth,death for h0 and h1
-    points=(a['dgms'][0][0:-1,1])
-    pointsh1=(a['dgms'][1])
+    points = (a['dgms'][0][0:-1,1])
+    pointsh1 = (a['dgms'][1])
     diagrams = rips.fit_transform(D, distance_matrix=True) 
+
     #Find pair electronegativies
     eleneg=list()
     for index in points:
-        c=np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
-      #  print (index)
-      #  print (c)
+        c = np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
+
         eleneg.append(np.abs(ELEMENTS[elements[c[0]]].eleneg - ELEMENTS[elements[c[1]]].eleneg))
     
     #new matrix with electronegativity variance in third row, completely empirical
     #Formula (| EN1 - EN2| + .4) / 10
-    #print(diagrams[0][0:-1,:])
-    #print ((np.array(eleneg)+.4)/10)
     
-    h0matrix=np.hstack(((diagrams[0][0:-1,:], np.reshape(((np.array(eleneg)+.4)/10 ), (np.size(eleneg),1)))))
-    buffer=np.full((diagrams[1][:,0].size,1), 0.05)
-    h1matrix=np.hstack((diagrams[1],buffer))
-    #print (h0matrix)
-    #print (h1matrix)
+    h0matrix = np.hstack(((diagrams[0][0:-1,:], np.reshape(((np.array(eleneg)+.4)/10 ), (np.size(eleneg),1)))))
+    buffer = np.full((diagrams[1][:,0].size,1), 0.05)
+    h1matrix = np.hstack((diagrams[1],buffer))
+    
     #combine them
-    Totalmatrix=np.vstack((h0matrix,h1matrix))
+    Totalmatrix = np.vstack((h0matrix,h1matrix))
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs, verbose=False)
     imgs = pim.transform(Totalmatrix)
-    #print (imgs)
     
     if showplot == True:
         pim.show(imgs)
         plt.show()
+
     return np.array(imgs.flatten())
 
-                    #plt.show()
-    #print (Totalmatrix)
 
 
-
-def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, 
+                    myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+    
     #Generate distance matrix and elementlist
-    D,elements=Makexyzdistance(Filename)
+    D, elements = Makexyzdistance(Filename)
    
     #Generate data for persistence diagram
-    a=ripser(D,distance_matrix=True)
+    a = ripser(D,distance_matrix=True)
+
     #Make the birth,death for h0 and h1
-    points=(a['dgms'][0][0:-1,1])
-    pointsh1=(a['dgms'][1])
+    points = (a['dgms'][0][0:-1,1])
+    pointsh1 = (a['dgms'][1])
     diagrams = rips.fit_transform(D, distance_matrix=True)
+
     #Find pair electronegativies
     eleneg=list()
+
     for index in points:
-        c=np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
-      #  print (index)
-      #  print (c)
+        c = np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
+
         eleneg.append(np.abs(ELEMENTS[elements[c[0]]].eleneg - ELEMENTS[elements[c[1]]].eleneg))
    
    
-    h0matrix=np.hstack(((diagrams[0][0:-1,:], np.reshape((((np.array(eleneg)*1.05)+.01)/10 ), (np.size(eleneg),1)))))
-    buffer=np.full((diagrams[1][:,0].size,1), 0.05)
-    h1matrix=np.hstack((diagrams[1],buffer))
-    #print (h0matrix)
-    #print (h1matrix)
+    h0matrix = np.hstack(((diagrams[0][0:-1,:], np.reshape((((np.array(eleneg)*1.05)+.01)/10 ), (np.size(eleneg),1)))))
+    buffer = np.full((diagrams[1][:,0].size,1), 0.05)
+    h1matrix = np.hstack((diagrams[1],buffer))
+    
     #combine them
-    Totalmatrix=np.vstack((h0matrix,h1matrix))
+    Totalmatrix = np.vstack((h0matrix,h1matrix))
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs, verbose=False)
     imgs = pim.transform(Totalmatrix)
-    #print (imgs)
    
     if showplot == True:
         pim.show(imgs)
@@ -332,9 +369,20 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, myspecs={"maxB
 
 
 def PersDiagram(xyz, lifetime=True):
+    '''
+    PersDiagram(xyz, lifetime)
+
+    Purpose: Creates a visual representation for a persistence diagram
+
+    Parameters:
+    -----------
+
+
+
+    '''
     plt.rcParams["font.family"] = "Times New Roman"
-    D,elements=Makexyzdistance(xyz)
-    data=ripser(D,distance_matrix=True)
+    D,elements = Makexyzdistance(xyz)
+    data = ripser(D,distance_matrix=True)
     rips = Rips()
     rips.transform(D, distance_matrix=True)
     rips.dgms_[0]=rips.dgms_[0][0:-1]
@@ -344,10 +392,10 @@ def PersDiagram(xyz, lifetime=True):
     plt.rcParams["font.family"] = "Times New Roman"
 
 def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={"maxBD": 3, "minBD":-0.1}):
-    X=VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
+    X = VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=bounds, verbose=False)
 
-    img=X.reshape(pixelx,pixely)
+    img = X.reshape(pixelx,pixely)
     pim.show(img)
     if savefile==True:
         plt.imsave(xyz+'_img.png',img, cmap=plt.get_cmap("plasma"), dpi=200)
