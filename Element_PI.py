@@ -18,21 +18,32 @@ from elements import ELEMENTS
 def Makexyzdistance(t):
     ''' Prepares a file with geometric chemical data for use in Vietoris-Rips filtration.
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     t: string
         - Name of source file for coordinate data for a compound
         - See documentation's specifications for file structure
-        - File contains x, y, z coordinates for each atom in compound
+        - File contains `(x, y, z)` coordinates for each atom in compound
 
-    Returns:
-    --------------
+    Returns
+    -------
     Distance: Numpy array
         - Distance matrix for every atom in the compound
         - Used as input to Vietoris-Rips filtration function (`ripser`)
     element: string
         - Name of the element being read 
+
+    Example
+    -------
+    Generating distance matrix for chemical compound stored in a file named `compound.xyz`::
+
+        from PersistentImages_Chemistry.Element_PI import Makexyzdistance
+
+        file_name = 'compound.xyz'
+        dist_matrix, name = Makexyzdistance(file_name)
     '''
+
+    # Load in data
     element = np.loadtxt(t, dtype=str, usecols=(0,), skiprows=2)
     x = np.loadtxt(t, dtype=float, usecols=(1), skiprows=2)
     y = np.loadtxt(t, dtype=float, usecols=(2), skiprows=2)
@@ -122,7 +133,7 @@ class PersImage(TransformerMixin):
 
         Returns
         -------
-        imgs: list 
+        imgs: list or sinfular 
             - Persistence images converted from corresponding diagrams
         """
 
@@ -154,7 +165,8 @@ class PersImage(TransformerMixin):
                                  for landscape in landscapes] + [0]),
             }
 
-        imgs = [self._transform(dgm) for dgm in landscapes]
+        # Applies the kernel over the landscape to smooth
+        imgs = [self.__transform(dgm) for dgm in landscapes]
 
         # Make sure we return one item.
         if singular:
@@ -162,7 +174,21 @@ class PersImage(TransformerMixin):
 
         return imgs
 
-    def _transform(self, landscape):
+    def __transform(self, landscape):
+        """ Applies kernel over the landscape.
+
+        Parameters
+        ----------
+        diagrams: list of or singleton diagram, list of pairs. [(birth, death)]
+            - Persistence diagrams to be converted to persistence images. 
+            - It is assumed they are in (birth, death) format. 
+            - Can input a list of diagrams or a single diagram.
+
+        Returns
+        -------
+        imgs: list 
+            - Persistence images converted from corresponding diagrams
+        """
 
         # Define an NxN grid over our landscape
         maxBD = self.specs["maxBD"]
@@ -328,66 +354,52 @@ class PersImage(TransformerMixin):
         for i, img in enumerate(imgs):
             ax.imshow(img, cmap=plt.get_cmap("plasma"))
             ax.axis("off")
-            
-
-def VariancePersistv1(Filename, pixelx = 100, pixely = 100, myspread = 2, 
-                        myspecs = {"maxBD": 2, "minBD": 0}, showplot = True):
-    #Generate distance matrix and elementlist
-    D,elements = Makexyzdistance(Filename)
-    
-    #Generate data for persistence diagram
-    a = ripser(D,distance_matrix=True)
-
-    #Make the birth,death for h0 and h1
-    points = (a['dgms'][0][0:-1,1])
-    pointsh1 = (a['dgms'][1])
-    diagrams = rips.fit_transform(D, distance_matrix=True) 
-
-    #Find pair electronegativies
-    eleneg=list()
-    for index in points:
-        c = np.where(np.abs((index-a['dperm2all'])) < .00000015)[0]
-
-        eleneg.append(np.abs(ELEMENTS[elements[c[0]]].eleneg - ELEMENTS[elements[c[1]]].eleneg))
-    
-    #new matrix with electronegativity variance in third row, completely empirical
-    #Formula (| EN1 - EN2| + .4) / 10
-    
-    h0matrix = np.hstack(((diagrams[0][0:-1,:], np.reshape(((np.array(eleneg)+.4)/10 ), (np.size(eleneg),1)))))
-    buffer = np.full((diagrams[1][:,0].size,1), 0.05)
-    h1matrix = np.hstack((diagrams[1],buffer))
-    
-    #combine them
-    Totalmatrix = np.vstack((h0matrix,h1matrix))
-    pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=myspecs, verbose=False)
-    imgs = pim.transform(Totalmatrix)
-    
-    if showplot == True:
-        pim.show(imgs)
-        plt.show()
-
-    return np.array(imgs.flatten())
-
 
 
 def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, 
                     myspecs={"maxBD": 2, "minBD":0}, showplot=True):
     ''' Generate a persistence image given a file with coordinates of atoms.
+        Includes difference in electronegativity.
 
     Parameters
     ----------
-    1. Filename
-    2. pixelx
-    3. pixely
-    4. myspread
-    5. myspecs
-    6. showplot: bool, optional
+    Filename: string
+        - Name of file with chemical data to read
+    pixelx: int, optional
+        - Default value = 100
+        - Number of pixels on x-axis
+    pixely: int, optional
+        - Default value = 100
+        - Number of pixels on y-axis
+    myspread: int, optional
+        - Default value = 2
+        - Parameter for kernel
+        - For Gaussian kernel, this specifies the variance
+    myspecs: dictionary, optional
+        - Default value = ``{"maxBD": 2, "minBD":0}``
+        - Specifies boundary extent in Angstroms
+        - Format::
+
+            { 
+                "maxBD": <float>,
+                "minBD": <float>
+            }
+
+        - ``maxBD``: upper boundary of persistence image (in Angstroms)
+        - ``minBD``: lower boundary of persistence image (in Angstroms)
+    showplot: bool, optional
         - Default value = True
         - Options:
-            - True = plot the PI once generated
-            - False = do not plot the PI
+            - ``True``: plot the PI once generated
+            - ``False``: do not plot the PI
+
+    Returns
+    -------
+    img_array: Numpy array
+        - One-dimensional vector representation of a persistence image
+        - 
+
     '''
-    
     
     #Generate distance matrix and elementlist
     D, elements = Makexyzdistance(Filename)
@@ -409,6 +421,9 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2,
         eleneg.append(np.abs(ELEMENTS[elements[c[0]]].eleneg - ELEMENTS[elements[c[1]]].eleneg))
    
    
+    #Original implementation of h0matrix:
+    #   h0matrix = np.hstack(((diagrams[0][0:-1,:], np.reshape(((np.array(eleneg)+.4)/10 ), (np.size(eleneg),1)))))
+
     h0matrix = np.hstack(((diagrams[0][0:-1,:], np.reshape((((np.array(eleneg)*1.05)+.01)/10 ), (np.size(eleneg),1)))))
     buffer = np.full((diagrams[1][:,0].size,1), 0.05)
     h1matrix = np.hstack((diagrams[1],buffer))
@@ -429,13 +444,13 @@ def PersDiagram(xyz, lifetime=True):
 
     Parameters
     ----------
-    1. xyz: string
+    xyz: string
         - Name for local file containing data on coordinates representing atoms in compound
-    2. lifetime: bool, optional
+    lifetime: bool, optional
         - Option to set the y-axis to lifetime value
         - Option:
-            - True = set coordinates to (birth, death - birth)
-            - False = set coordinates to (birth, death)
+            - ``True``: set coordinates to (birth, death - birth)
+            - ``False``: set coordinates to (birth, death)
 
     Returns
     -------

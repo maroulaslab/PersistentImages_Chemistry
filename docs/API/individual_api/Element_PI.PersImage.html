@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Element_PI.PersImage</title>
+    
+      <link rel="stylesheet" href="../../_static/pygments.css">
+      <link rel="stylesheet" href="../../_static/theme.css">
+      <link rel="stylesheet" href="../../_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+
+      
+      <script src="../../_static/theme-vendors.js"></script>
+      <script src="../../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../../genindex.html" />
+  <link rel="search" title="Search" href="../../search.html" />
+  <link rel="next" title="Element_PI.Makexyzdistance" href="Element_PI.Makexyzdistance.html" />
+  <link rel="prev" title="API Reference" href="../API_index.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../../index.html" class="home-link">
+    
+      <span class="site-name">Persistent Images for Chemistry</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../../index.html#installation"
+         class="nav-link ">
+         Contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../index.html#indices-and-tables"
+         class="nav-link ">
+         indices and tables
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../../index.html#installation"
+         class="nav-link ">
+         Contents
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../index.html#indices-and-tables"
+         class="nav-link ">
+         indices and tables
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../index.html#installation">Contents</a></span>
+      </p>
+      <ul class="">
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../index.html#indices-and-tables">indices and tables</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../../pages/PI.html" class="reference internal ">Persistent Images</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../API_index.html" class="reference internal ">API Reference</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../../pages/about.html" class="reference internal ">About</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../API_index.html">API Reference</a> &raquo;</li>
+    
+    <li>Element_PI.PersImage</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="../API_index.html"
+       title="previous chapter">← API Reference</a>
+  </li>
+  <li class="next">
+    <a href="Element_PI.Makexyzdistance.html"
+       title="next chapter">Element_PI.Makexyzdistance →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="element-pi-persimage">
+<h1>Element_PI.PersImage<a class="headerlink" href="#element-pi-persimage" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="Element_PI.PersImage">
+<em class="property">class </em><code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">PersImage</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pixels</span><span class="o">=</span><span class="default_value">20, 20</span></em>, <em class="sig-param"><span class="n">spread</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">specs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">kernel_type</span><span class="o">=</span><span class="default_value">'gaussian'</span></em>, <em class="sig-param"><span class="n">weighting_type</span><span class="o">=</span><span class="default_value">'linear'</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize a persistence image generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pixels</strong> (<em>pair of ints like</em><em> (</em><em>int</em><em>, </em><em>int</em><em>)</em>) – <ul>
+<li><p>Tuple representing number of pixels in return image along x and y axis.</p></li>
+</ul>
+</p></li>
+<li><p><strong>spread</strong> (<em>float</em>) – <ul>
+<li><p>Standard deviation of gaussian kernel</p></li>
+</ul>
+</p></li>
+<li><p><strong>specs</strong> (<em>dict</em>) – <ul>
+<li><p>Parameters for shape of image with respect to diagram domain.</p></li>
+<li><p>Units are specified in Angstroms.</p></li>
+<li><p>This is used if you would like images to have a particular range. Shaped like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="nb">float</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</p></li>
+<li><p><strong>kernel_type</strong> (<em>string</em><em> or </em><em>..</em>) – <ul>
+<li><p>TODO: Implement this feature.</p></li>
+<li><p>Determine which type of kernel used in the convolution, or pass in custom kernel. Currently only implements Gaussian.</p></li>
+</ul>
+</p></li>
+<li><p><strong>weighting_type</strong> (<em>string</em><em> or </em><em>..</em>) – <ul>
+<li><p>TODO: Implement this feature.</p></li>
+<li><p>Determine which type of weighting function used, or pass in custom weighting function.</p></li>
+<li><p>Currently only implements linear weighting.</p></li>
+</ul>
+</p></li>
+<li><p><strong>Usage</strong> – </p></li>
+<li><p><strong>-----</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#Element_PI.PersImage.__init__" title="Element_PI.PersImage.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([pixels, spread, specs, …])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#Element_PI.PersImage.transform" title="Element_PI.PersImage.transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transform</span></code></a>(diagrams)</p></td>
+<td><p>Convert diagram or list of diagrams to a persistence image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">_transform</span></code>(landscape)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#Element_PI.PersImage.weighting" title="Element_PI.PersImage.weighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">weighting</span></code></a>([landscape])</p></td>
+<td><p>Define a weighting function.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#Element_PI.PersImage.kernel" title="Element_PI.PersImage.kernel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kernel</span></code></a>([spread])</p></td>
+<td><p>This will return whatever kind of kernel we want to use.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#Element_PI.PersImage.to_landscape" title="Element_PI.PersImage.to_landscape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_landscape</span></code></a>(diagram)</p></td>
+<td><p>Convert a diagram to a landscape (birth, death) -&gt; (birth, death-birth)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#Element_PI.PersImage.show" title="Element_PI.PersImage.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(imgs[, ax])</p></td>
+<td><p>Visualize the persistence image.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="Element_PI.PersImage.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pixels</span><span class="o">=</span><span class="default_value">20, 20</span></em>, <em class="sig-param"><span class="n">spread</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">specs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">kernel_type</span><span class="o">=</span><span class="default_value">'gaussian'</span></em>, <em class="sig-param"><span class="n">weighting_type</span><span class="o">=</span><span class="default_value">'linear'</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Element_PI.PersImage.transform">
+<code class="sig-name descname">transform</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diagrams</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert diagram or list of diagrams to a persistence image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>diagrams</strong> (<em>list of</em><em> or </em><em>singleton diagram</em><em>, </em><em>list of pairs.</em><em> [</em><em>(</em><em>birth</em><em>, </em><em>death</em><em>)</em><em>]</em>) – <ul class="simple">
+<li><p>Persistence diagrams to be converted to persistence images.</p></li>
+<li><p>It is assumed they are in (birth, death) format.</p></li>
+<li><p>Can input a list of diagrams or a single diagram.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>imgs</strong> –</p>
+<ul class="simple">
+<li><p>Persistence images converted from corresponding diagrams</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Element_PI.PersImage.weighting">
+<code class="sig-name descname">weighting</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">landscape</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.weighting" title="Permalink to this definition">¶</a></dt>
+<dd><dl>
+<dt>Define a weighting function.</dt><dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For stability results to hold, the function must be 0 at y=0.</p>
+</div>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>landscape</strong> (<em>Numpy array</em>) – <ul class="simple">
+<li><p>Converted diagram feature (see <cite>diagram</cite> argument in <cite>tranform</cite> function)</p></li>
+<li><p>Note: diagram converted to landscape in to_landscape function</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>weighting_fn</strong> –</p>
+<ul class="simple">
+<li><p>The weighting function based on specifications in __init__</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Element_PI.PersImage.kernel">
+<code class="sig-name descname">kernel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">spread</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.kernel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>This will return whatever kind of kernel we want to use.</dt><dd><p>Must have signature (ndarray size NxM, ndarray size 1xM) -&gt; ndarray size Nx1.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>spread</strong> (<em>float</em><em>, </em><em>optional</em>) – <ul class="simple">
+<li><p>Default: 1</p></li>
+<li><p>Variance/covariance for the kernel</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>kernel_fn</strong> –</p>
+<ul class="simple">
+<li><p>Kernel function based on specification in <cite>__init__</cite></p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>function</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Element_PI.PersImage.to_landscape">
+<em class="property">static </em><code class="sig-name descname">to_landscape</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">diagram</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.to_landscape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a diagram to a landscape (birth, death) -&gt; (birth, death-birth)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>diagram</strong> (<em>list of pairs</em><em>, </em><em>[</em><em>(</em><em>birth</em><em>, </em><em>death</em><em>)</em><em>]</em>) – <ul class="simple">
+<li><p>Persistence diagram to be converted to persistence image.</p></li>
+<li><p>It is assumed to be in (birth, death) format.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>diagram</strong> –</p>
+<ul class="simple">
+<li><p>Converted persistence diagram with coordinates [(birth, death-birth)]</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of pairs, [(birth, death)]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="Element_PI.PersImage.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">imgs</span></em>, <em class="sig-param"><span class="n">ax</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersImage.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visualize the persistence image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imgs</strong> (<em>Numpy array</em>) – <ul>
+<li><p>Persistence images to show</p></li>
+<li><p>Can be list of images or single image</p></li>
+</ul>
+</p></li>
+<li><p><strong>ax</strong> (Axes instance from <cite>matplotlib.pyplot</cite>, optional) – <ul>
+<li><p>Option to provide a plotting object for plotting PI</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>No explicit return. Plots the PI on the given <cite>Axes</cite> (or a new one if not given).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="../API_index.html"
+       title="previous chapter">← API Reference</a>
+  </li>
+  <li class="next">
+    <a href="Element_PI.Makexyzdistance.html"
+       title="next chapter">Element_PI.Makexyzdistance →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

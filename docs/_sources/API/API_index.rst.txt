@@ -1,9 +1,14 @@
-PersistentImages_Chemistry API
+API Reference
 ******************************
 
-.. toctree::
-    :maxdepth: 1
-    :caption: Modules
+.. autosummary::
+    :toctree: individual_api
 
-    Element_PI <Element_PI_doc>
+    Element_PI.PersImage
+    Element_PI.Makexyzdistance
+    Element_PI.VariancePersist
+    Element_PI.PersDiagram
+    Element_PI.Generate_PI
+    
+
 
