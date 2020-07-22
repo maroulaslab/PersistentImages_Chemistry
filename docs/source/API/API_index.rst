@@ -5,5 +5,5 @@ PersistentImages_Chemistry API
     :maxdepth: 1
     :caption: Modules
 
-    Element_PI <Element_PI_index>
+    Element_PI <Element_PI_doc>
 

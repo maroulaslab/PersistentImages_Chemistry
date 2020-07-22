@@ -16,23 +16,22 @@ from elements import ELEMENTS
 
 
 def Makexyzdistance(t):
-    '''
-    distance, element = Makexyzdistance(t)
-
-    Purpose: Reads in x, y, z data for atoms in a chemical 
-    compound and returns their distances and the name of the compound.
+    ''' Prepares a file with geometric chemical data for use in Vietoris-Rips filtration.
 
     Parameters:
     -----------
-    t: name of source file for coordinate data for a compound
+    t: string
+        - Name of source file for coordinate data for a compound
         - See documentation's specifications for file structure
         - File contains x, y, z coordinates for each atom in compound
 
-    Return Values:
+    Returns:
     --------------
-    Distance: distance matrix for every atom in the compound
-
-    element: name of the element being read 
+    Distance: Numpy array
+        - Distance matrix for every atom in the compound
+        - Used as input to Vietoris-Rips filtration function (`ripser`)
+    element: string
+        - Name of the element being read 
     '''
     element = np.loadtxt(t, dtype=str, usecols=(0,), skiprows=2)
     x = np.loadtxt(t, dtype=float, usecols=(1), skiprows=2)
@@ -60,31 +59,30 @@ class PersImage(TransformerMixin):
 
     Parameters
     -----------
-
-    pixels : pair of ints like (int, int)
-        Tuple representing number of pixels in return image along x and y axis.
-    spread : float
-        Standard deviation of gaussian kernel
-    specs : dict
-        Parameters for shape of image with respect to diagram domain. This is used if you would like images to have a particular range. Shaped like 
-        ::
+    pixels: pair of ints like (int, int)
+        - Tuple representing number of pixels in return image along x and y axis.
+    spread: float
+        - Standard deviation of gaussian kernel
+    specs: dict
+        - Parameters for shape of image with respect to diagram domain. 
+        - Units are specified in Angstroms.
+        - This is used if you would like images to have a particular range. Shaped like::
         
             {
                 "maxBD": float,
                 "minBD": float
             }
 
-    kernel_type : string or ...
-        TODO: Implement this feature.
-        Determine which type of kernel used in the convolution, or pass in custom kernel. Currently only implements Gaussian.
-    weighting_type : string or ...
-        TODO: Implement this feature.
-        Determine which type of weighting function used, or pass in custom weighting function.
-        Currently only implements linear weighting.
-
+    kernel_type: string or ...
+        - TODO: Implement this feature.
+        - Determine which type of kernel used in the convolution, or pass in custom kernel. Currently only implements Gaussian.
+    weighting_type: string or ...
+        - TODO: Implement this feature.
+        - Determine which type of weighting function used, or pass in custom weighting function.
+        - Currently only implements linear weighting.
 
     Usage
-    ------
+    -----
 
 
     """
@@ -116,12 +114,16 @@ class PersImage(TransformerMixin):
         """ Convert diagram or list of diagrams to a persistence image.
 
         Parameters
-        -----------
-
-        diagrams : list of or singleton diagram, list of pairs. [(birth, death)]
+        ----------
+        diagrams: list of or singleton diagram, list of pairs. [(birth, death)]
             - Persistence diagrams to be converted to persistence images. 
             - It is assumed they are in (birth, death) format. 
             - Can input a list of diagrams or a single diagram.
+
+        Returns
+        -------
+        imgs: list 
+            - Persistence images converted from corresponding diagrams
         """
 
         # if diagram is empty, return empty image
@@ -174,6 +176,7 @@ class PersImage(TransformerMixin):
         ys_lower = np.linspace(0, maxBD, self.ny)
         ys_upper = np.linspace(0, maxBD, self.ny) + dx
 
+        # Apply weighting function
         weighting = self.weighting(landscape)
 
         # Define zeros
@@ -208,8 +211,19 @@ class PersImage(TransformerMixin):
             return img
 
     def weighting(self, landscape=None):
-        """ Define a weighting function, 
-                for stability results to hold, the function must be 0 at y=0.    
+        """ Define a weighting function.
+            .. note:: For stability results to hold, the function must be 0 at y=0.
+
+        Parameters
+        ----------
+        landscape: Numpy array
+            - Converted diagram feature (see `diagram` argument in `tranform` function)
+            - Note: diagram converted to landscape in to_landscape function
+
+        Returns
+        -------
+        weighting_fn: function
+            - The weighting function based on specifications in __init__
         """
 
         # TODO: Implement a logistic function
@@ -242,41 +256,67 @@ class PersImage(TransformerMixin):
             if b <= t:
                 return 1
 
-        return linear
+        weighting_fn = linear
+
+        return weighting_fn
 
     def kernel(self, spread=1):
         """ This will return whatever kind of kernel we want to use.
-            Must have signature (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1
+            Must have signature (ndarray size NxM, ndarray size 1xM) -> ndarray size Nx1.
 
-        Parameters:
-        -----------
-        spread: variance/covariance for the kernel
+        Parameters
+        ----------
+        spread: float, optional
+            - Default: 1
+            - Variance/covariance for the kernel
+
+        Returns
+        -------
+        kernel_fn: function
+            - Kernel function based on specification in `__init__`
         """
         # TODO: use self.kernel_type to choose function
 
         def gaussian(data, pixel):
             return mvn.pdf(data, mean = pixel, cov = spread)
 
-        return gaussian
+        kernel_fn = gaussian
+
+        return kernel_fn
 
     @staticmethod
     def to_landscape(diagram):
-        """ Convert a diagram to a landscape
-            (birth, death) -> (birth, death-birth)
+        """ Convert a diagram to a landscape (birth, death) -> (birth, death-birth)
+    
+        Parameters
+        ----------
+        diagram: list of pairs, [(birth, death)]
+            - Persistence diagram to be converted to persistence image. 
+            - It is assumed to be in (birth, death) format. 
+
+        Returns
+        -------
+        diagram: list of pairs, [(birth, death)]
+            - Converted persistence diagram with coordinates [(birth, death-birth)]
         """
         diagram[:, 1] -= diagram[:, 0]
 
         return diagram
 
     def show(self, imgs, ax=None):
-        """ 
-        Visualize the persistence image
-        
-        Parameters:
-        -----------
-        imgs: persistence images to show
-        ax: Axes for a pyplot
-            - Providing this is optional
+        """ Visualize the persistence image.
+
+        Parameters
+        ----------
+        imgs: Numpy array
+            - Persistence images to show
+            - Can be list of images or single image
+        ax: Axes instance from `matplotlib.pyplot`, optional
+            - Option to provide a plotting object for plotting PI
+
+        Returns
+        -------
+        No explicit return. Plots the PI on the given `Axes` (or a new one if not given).
         """
 
         ax = ax or plt.gca() # Get current axis if none is given
@@ -332,6 +372,22 @@ def VariancePersistv1(Filename, pixelx = 100, pixely = 100, myspread = 2,
 
 def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2, 
                     myspecs={"maxBD": 2, "minBD":0}, showplot=True):
+    ''' Generate a persistence image given a file with coordinates of atoms.
+
+    Parameters
+    ----------
+    1. Filename
+    2. pixelx
+    3. pixely
+    4. myspread
+    5. myspecs
+    6. showplot: bool, optional
+        - Default value = True
+        - Options:
+            - True = plot the PI once generated
+            - False = do not plot the PI
+    '''
+    
     
     #Generate distance matrix and elementlist
     D, elements = Makexyzdistance(Filename)
@@ -344,7 +400,7 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2,
     pointsh1 = (a['dgms'][1])
     diagrams = rips.fit_transform(D, distance_matrix=True)
 
-    #Find pair electronegativies
+    #Find pair electronegativities
     eleneg=list()
 
     for index in points:
@@ -369,29 +425,52 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2,
 
 
 def PersDiagram(xyz, lifetime=True):
+    ''' Creates a visual representation for a persistence diagram
+
+    Parameters
+    ----------
+    1. xyz: string
+        - Name for local file containing data on coordinates representing atoms in compound
+    2. lifetime: bool, optional
+        - Option to set the y-axis to lifetime value
+        - Option:
+            - True = set coordinates to (birth, death - birth)
+            - False = set coordinates to (birth, death)
+
+    Returns
+    -------
+    No explicit return value. Plots the persistence diagram.
     '''
-    PersDiagram(xyz, lifetime)
 
-    Purpose: Creates a visual representation for a persistence diagram
-
-    Parameters:
-    -----------
-
-
-
-    '''
     plt.rcParams["font.family"] = "Times New Roman"
     D,elements = Makexyzdistance(xyz)
     data = ripser(D,distance_matrix=True)
+
+    # Perform plotting with Rips() object
     rips = Rips()
     rips.transform(D, distance_matrix=True)
-    rips.dgms_[0]=rips.dgms_[0][0:-1]
+    rips.dgms_[0] = rips.dgms_[0][0:-1]
     rips.plot(show=False, lifetime=lifetime, labels=['Connected Components','Holes'])
+
     L = plt.legend()
     plt.setp(L.texts, family="Times New Roman")
     plt.rcParams["font.family"] = "Times New Roman"
 
 def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={"maxBD": 3, "minBD":-0.1}):
+    ''' Outputs a visual representation of a persistence image based on file given.
+
+    Parameters
+    ----------
+    xyz
+    savefile
+    pixelx
+    pixely
+    myspread
+    bounds
+
+    Returns
+    -------
+    '''
     X = VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=bounds, verbose=False)
 
