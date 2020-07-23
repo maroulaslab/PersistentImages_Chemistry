@@ -23,7 +23,7 @@
     
   <link rel="index" title="Index" href="../../genindex.html" />
   <link rel="search" title="Search" href="../../search.html" />
-  <link rel="next" title="&lt;no title&gt;" href="Element_PI.PersDiagram.html" />
+  <link rel="next" title="Element_PI.PersDiagram" href="Element_PI.PersDiagram.html" />
   <link rel="prev" title="Element_PI.Makexyzdistance" href="Element_PI.Makexyzdistance.html" /> 
   </head>
 
@@ -40,16 +40,16 @@
 
   
     <div class="nav-item">
-      <a href="../../index.html#installation"
+      <a href="../../index.html#persistentimages-chemistry-documentation"
          class="nav-link ">
-         Contents
+         Tutorials
       </a>
     </div>
   
     <div class="nav-item">
-      <a href="../../index.html#indices-and-tables"
+      <a href="../../index.html#persistentimages-chemistry-documentation"
          class="nav-link ">
-         indices and tables
+         Tools
       </a>
     </div>
   
@@ -70,16 +70,16 @@
 
   
     <div class="nav-item">
-      <a href="../../index.html#installation"
+      <a href="../../index.html#persistentimages-chemistry-documentation"
          class="nav-link ">
-         Contents
+         Tutorials
       </a>
     </div>
   
     <div class="nav-item">
-      <a href="../../index.html#indices-and-tables"
+      <a href="../../index.html#persistentimages-chemistry-documentation"
          class="nav-link ">
-         indices and tables
+         Tools
       </a>
     </div>
   
@@ -102,20 +102,26 @@
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="../../index.html#installation">Contents</a></span>
+        <span class="caption-text"><a href="../../index.html#persistentimages-chemistry-documentation">Tutorials</a></span>
       </p>
       <ul class="">
+        
+          <li class="toctree-l1 "><a href="../../pages/PI.html" class="reference internal ">Persistent Images</a>
+
+            
+          </li>
+
         
       </ul>
     </div>
   
     <div class="sidebar-group">
       <p class="caption">
-        <span class="caption-text"><a href="../../index.html#indices-and-tables">indices and tables</a></span>
+        <span class="caption-text"><a href="../../index.html#persistentimages-chemistry-documentation">Tools</a></span>
       </p>
       <ul class="">
         
-          <li class="toctree-l1 "><a href="../../pages/PI.html" class="reference internal ">Persistent Images</a>
+          <li class="toctree-l1 "><a href="../../pages/Installation.html" class="reference internal ">Installation</a>
 
             
           </li>
@@ -158,7 +164,7 @@
   </li>
   <li class="next">
     <a href="Element_PI.PersDiagram.html"
-       title="next chapter">&lt;no title&gt; →</a>
+       title="next chapter">Element_PI.PersDiagram →</a>
   </li>
 </ul>
   
@@ -227,9 +233,43 @@
 </p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>img_array</strong> –</p>
+<ul class="simple">
+<li><p>One-dimensional vector representation of a persistence image</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Numpy array</p>
+</dd>
 </dl>
 </dd></dl>
 
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The following example demonstrates how to create a persistence image based on chemical
+data found in the <cite>compound.xyz</cite> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">Element_PI</span> <span class="kn">import</span> <span class="n">VariancePersist</span>
+
+<span class="c1"># Size of generated image is 10x10</span>
+<span class="n">pix_y</span>  <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pix_x</span>  <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">spread</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># Set variance to 2</span>
+<span class="n">specs</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;maxBD&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;minBD&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="n">PI_vector</span> <span class="o">=</span> <span class="n">VariancePersist</span><span class="p">(</span><span class="s1">&#39;compound.xyz&#39;</span><span class="p">,</span>
+                            <span class="n">pixelx</span> <span class="o">=</span> <span class="n">pix_x</span><span class="p">,</span>
+                            <span class="n">pixely</span> <span class="o">=</span> <span class="n">pix_y</span><span class="p">,</span>
+                            <span class="n">myspread</span> <span class="o">=</span> <span class="n">spread</span>
+                            <span class="n">myspecs</span> <span class="o">=</span> <span class="n">specs</span><span class="p">,</span>
+                            <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>An example of the image output by running the above code would be:</p>
+<img alt="../../_images/PI_example_variancepersist.png" src="../../_images/PI_example_variancepersist.png" />
+</div>
 </div>
 
 
@@ -242,7 +282,7 @@
   </li>
   <li class="next">
     <a href="Element_PI.PersDiagram.html"
-       title="next chapter">&lt;no title&gt; →</a>
+       title="next chapter">Element_PI.PersDiagram →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.

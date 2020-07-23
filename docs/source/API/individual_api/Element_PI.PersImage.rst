@@ -3,6 +3,8 @@ Element_PI.PersImage
 
 .. currentmodule:: Element_PI
 
+.. note:: The implementation of this class is adapted from the `scikit-tda/PerSim` package, whose code can be found at `this link <https://github.com/scikit-tda/persim>`_. 
+
 .. autoclass:: PersImage
 
     .. rubric:: Methods
@@ -28,5 +30,3 @@ Element_PI.PersImage
     .. automethod:: to_landscape
 
     .. automethod:: show
-
-

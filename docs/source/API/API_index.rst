@@ -8,7 +8,7 @@ API Reference
     Element_PI.Makexyzdistance
     Element_PI.VariancePersist
     Element_PI.PersDiagram
-    Element_PI.Generate_PI
+    Element_PI.GeneratePI
     
 
 

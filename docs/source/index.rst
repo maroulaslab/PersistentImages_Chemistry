@@ -14,33 +14,20 @@ The source code for this repository can be found in the
 
 You can download the original paper `here <https://www.nature.com/articles/s41467-020-17035-5.pdf>`_.
 
-Installation
-============
-
-Install this code by entering the following commands::
-
-   git clone https://gitlab.com/voglab/PersistentImages_Chemistry.git
-
-
 .. toctree::
    :maxdepth: 2
-   :caption: Contents
+   :hidden:
+   :caption: Tutorials
+
+   pages/PI
    
-   
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
 .. toctree::
    :maxdepth: 1
    :hidden:
+   :caption: Tools
 
-   pages/PI
+   pages/Installation
    API/API_index
    pages/about
 

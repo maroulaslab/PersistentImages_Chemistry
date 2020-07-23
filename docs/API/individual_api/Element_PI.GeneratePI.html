@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>Element_PI.PersDiagram</title>
+      <title>Element_PI.Generate_PI</title>
     
       <link rel="stylesheet" href="../../_static/pygments.css">
       <link rel="stylesheet" href="../../_static/theme.css">
@@ -23,8 +23,8 @@
     
   <link rel="index" title="Index" href="../../genindex.html" />
   <link rel="search" title="Search" href="../../search.html" />
-  <link rel="next" title="Element_PI.Generate_PI" href="Element_PI.GeneratePI.html" />
-  <link rel="prev" title="Element_PI.VariancePersist" href="Element_PI.VariancePersist.html" /> 
+  <link rel="next" title="About" href="../../pages/about.html" />
+  <link rel="prev" title="Element_PI.PersDiagram" href="Element_PI.PersDiagram.html" /> 
   </head>
 
   <body>
@@ -153,18 +153,18 @@
     
       <li><a href="../API_index.html">API Reference</a> &raquo;</li>
     
-    <li>Element_PI.PersDiagram</li>
+    <li>Element_PI.Generate_PI</li>
   </ul>
   
 
   <ul class="page-nav">
   <li class="prev">
-    <a href="Element_PI.VariancePersist.html"
-       title="previous chapter">← Element_PI.VariancePersist</a>
+    <a href="Element_PI.PersDiagram.html"
+       title="previous chapter">← Element_PI.PersDiagram</a>
   </li>
   <li class="next">
-    <a href="Element_PI.GeneratePI.html"
-       title="next chapter">Element_PI.Generate_PI →</a>
+    <a href="../../pages/about.html"
+       title="next chapter">About →</a>
   </li>
 </ul>
   
@@ -172,12 +172,12 @@
 <hr>
           <div class="content" role="main">
             
-  <div class="section" id="element-pi-persdiagram">
-<h1>Element_PI.PersDiagram<a class="headerlink" href="#element-pi-persdiagram" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="element-pi-generate-pi">
+<h1>Element_PI.Generate_PI<a class="headerlink" href="#element-pi-generate-pi" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
-<dt id="Element_PI.PersDiagram">
-<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">PersDiagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersDiagram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a visual representation for a persistence diagram</p>
+<dt id="Element_PI.GeneratePI">
+<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">GeneratePI</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">savefile</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">pixelx</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">pixely</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">myspread</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">bounds</span><span class="o">=</span><span class="default_value">{'maxBD': 3, 'minBD': - 0.1}</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.GeneratePI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs a visual representation of a persistence image based on file given.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -185,25 +185,58 @@
 <li><p>Name for local file containing data on coordinates representing atoms in compound</p></li>
 </ul>
 </p></li>
-<li><p><strong>lifetime</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
-<li><p>Option to set the y-axis to lifetime value</p></li>
+<li><p><strong>savefile</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = False</p></li>
 <li><dl class="simple">
-<dt>Option:</dt><dd><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: set coordinates to (birth, death - birth)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: set coordinates to (birth, death)</p></li>
+<dt>Options:</dt><dd><ul>
+<li><p><cite>True</cite> = plot of PI is saved</p></li>
+<li><p><cite>False</cite> = plot is not saved</p></li>
 </ul>
 </dd>
 </dl>
 </li>
+<li><p>Saves file to: <cite>&lt;xyz&gt;_img.png</cite></p></li>
+</ul>
+</p></li>
+<li><p><strong>pixelx</strong> (<em>int</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 100</p></li>
+<li><p>Number of pixels on x-axis</p></li>
+</ul>
+</p></li>
+<li><p><strong>pixely</strong> (<em>int</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 100</p></li>
+<li><p>Number of pixels on y-axis</p></li>
+</ul>
+</p></li>
+<li><p><strong>myspread</strong> (<em>float</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 2</p></li>
+<li><p>Parameter for kernel</p></li>
+<li><p>For Gaussian kernel, this specifies the variance</p></li>
+</ul>
+</p></li>
+<li><p><strong>bounds</strong> (<em>dictionary</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:</span> <span class="pre">2,</span> <span class="pre">&quot;minBD&quot;:0}</span></code></p></li>
+<li><p>Specifies boundary extent in Angstroms</p></li>
+<li><p>Format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maxBD</span></code>: upper boundary of persistence image (in Angstroms)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minBD</span></code>: lower boundary of persistence image (in Angstroms)</p></li>
 </ul>
 </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>No explicit return value. Plots the persistence diagram.</p>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>None</strong> (<em>none</em>)</p></li>
+<li><p><em>No explicit return value. Outputs the plot of the PI to the screen.</em></p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -215,12 +248,12 @@
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
   <li class="prev">
-    <a href="Element_PI.VariancePersist.html"
-       title="previous chapter">← Element_PI.VariancePersist</a>
+    <a href="Element_PI.PersDiagram.html"
+       title="previous chapter">← Element_PI.PersDiagram</a>
   </li>
   <li class="next">
-    <a href="Element_PI.GeneratePI.html"
-       title="next chapter">Element_PI.Generate_PI →</a>
+    <a href="../../pages/about.html"
+       title="next chapter">About →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.

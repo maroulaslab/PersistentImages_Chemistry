@@ -133,7 +133,7 @@ class PersImage(TransformerMixin):
 
         Returns
         -------
-        imgs: list or sinfular 
+        imgs: list or singular 
             - Persistence images converted from corresponding diagrams
         """
 
@@ -342,6 +342,7 @@ class PersImage(TransformerMixin):
 
         Returns
         -------
+        None: None
         No explicit return. Plots the PI on the given `Axes` (or a new one if not given).
         """
 
@@ -397,8 +398,6 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2,
     -------
     img_array: Numpy array
         - One-dimensional vector representation of a persistence image
-        - 
-
     '''
     
     #Generate distance matrix and elementlist
@@ -476,21 +475,48 @@ def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={
 
     Parameters
     ----------
-    xyz
-    savefile
-    pixelx
-    pixely
-    myspread
-    bounds
+    xyz: string
+        - Name for local file containing data on coordinates representing atoms in compound
+    savefile: bool, optional
+        - Default value = False
+        - Options:
+            - `True` = plot of PI is saved
+            - `False` = plot is not saved
+        - Saves file to: `<xyz>_img.png`
+    pixelx: int, optional
+        - Default value = 100
+        - Number of pixels on x-axis
+    pixely: int, optional
+        - Default value = 100
+        - Number of pixels on y-axis
+    myspread: float, optional
+        - Default value = 2
+        - Parameter for kernel
+        - For Gaussian kernel, this specifies the variance
+    bounds: dictionary, optional
+        - Default value = ``{"maxBD": 2, "minBD":0}``
+        - Specifies boundary extent in Angstroms
+        - Format::
+
+            { 
+                "maxBD": <float>,
+                "minBD": <float>
+            }
+
+        - ``maxBD``: upper boundary of persistence image (in Angstroms)
+        - ``minBD``: lower boundary of persistence image (in Angstroms)
 
     Returns
     -------
+    None: none
+    No explicit return value. Outputs the plot of the PI to the screen.
     '''
     X = VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=bounds, verbose=False)
 
     img = X.reshape(pixelx,pixely)
     pim.show(img)
-    if savefile==True:
+
+    if savefile==True: # Save file to specified output
         plt.imsave(xyz+'_img.png',img, cmap=plt.get_cmap("plasma"), dpi=200)
 
