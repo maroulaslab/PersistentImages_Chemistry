@@ -453,7 +453,9 @@ def PersDiagram(xyz, lifetime=True):
 
     Returns
     -------
-    No explicit return value. Plots the persistence diagram.
+    rips: `Rips` object from the ripser module
+        - See `ripser documentation <https://ripser.scikit-tda.org/reference/stubs/ripser.Rips.html#>`_ for this return value.
+        - This object has the data specified in `xyz` fit to it.
     '''
 
     plt.rcParams["font.family"] = "Times New Roman"
@@ -469,6 +471,9 @@ def PersDiagram(xyz, lifetime=True):
     L = plt.legend()
     plt.setp(L.texts, family="Times New Roman")
     plt.rcParams["font.family"] = "Times New Roman"
+
+    # Return the Rips object fitted with our data.
+    return rips
 
 def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={"maxBD": 3, "minBD":-0.1}):
     ''' Outputs a visual representation of a persistence image based on file given.
@@ -511,7 +516,7 @@ def GeneratePI(xyz, savefile=False, pixelx=100, pixely=100, myspread=2, bounds={
     None: none
     No explicit return value. Outputs the plot of the PI to the screen.
     '''
-    X = VariancePersistv1(xyz, pixelx=100, pixely=100, myspread=2 ,myspecs=bounds, showplot=False)
+    X = VariancePersist(xyz, pixelx = pixelx, pixely = pixely, myspread = myspread, myspecs = bounds, showplot=False)
     pim = PersImage(pixels=[pixelx,pixely], spread=myspread, specs=bounds, verbose=False)
 
     img = X.reshape(pixelx,pixely)
