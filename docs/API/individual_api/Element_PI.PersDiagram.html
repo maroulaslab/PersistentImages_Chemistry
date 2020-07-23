@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Element_PI.PersDiagram</title>
+    
+      <link rel="stylesheet" href="../../_static/pygments.css">
+      <link rel="stylesheet" href="../../_static/theme.css">
+      <link rel="stylesheet" href="../../_static/sphinx_press_theme.css">
+      
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+
+      <!-- sphinx script_files -->
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+
+      
+      <script src="../../_static/theme-vendors.js"></script>
+      <script src="../../_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="../../genindex.html" />
+  <link rel="search" title="Search" href="../../search.html" />
+  <link rel="next" title="Element_PI.Generate_PI" href="Element_PI.GeneratePI.html" />
+  <link rel="prev" title="Element_PI.VariancePersist" href="Element_PI.VariancePersist.html" /> 
+  </head>
+
+  <body>
+    <div id="app" class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="../../index.html" class="home-link">
+    
+      <span class="site-name">Persistent Images for Chemistry</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+  
+    <div class="nav-item">
+      <a href="../../index.html#persistentimages-chemistry-documentation"
+         class="nav-link ">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../index.html#persistentimages-chemistry-documentation"
+         class="nav-link ">
+         Tools
+      </a>
+    </div>
+  
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+  
+    <div class="nav-item">
+      <a href="../../index.html#persistentimages-chemistry-documentation"
+         class="nav-link ">
+         Tutorials
+      </a>
+    </div>
+  
+    <div class="nav-item">
+      <a href="../../index.html#persistentimages-chemistry-documentation"
+         class="nav-link ">
+         Tools
+      </a>
+    </div>
+  
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="../../search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../index.html#persistentimages-chemistry-documentation">Tutorials</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../../pages/PI.html" class="reference internal ">Persistent Images</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="../../index.html#persistentimages-chemistry-documentation">Tools</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 "><a href="../../pages/Installation.html" class="reference internal ">Installation</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../API_index.html" class="reference internal ">API Reference</a>
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 "><a href="../../pages/about.html" class="reference internal ">About</a>
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+    
+      <li><a href="../API_index.html">API Reference</a> &raquo;</li>
+    
+    <li>Element_PI.PersDiagram</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="Element_PI.VariancePersist.html"
+       title="previous chapter">← Element_PI.VariancePersist</a>
+  </li>
+  <li class="next">
+    <a href="Element_PI.GeneratePI.html"
+       title="next chapter">Element_PI.Generate_PI →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main">
+            
+  <div class="section" id="element-pi-persdiagram">
+<h1>Element_PI.PersDiagram<a class="headerlink" href="#element-pi-persdiagram" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="Element_PI.PersDiagram">
+<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">PersDiagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersDiagram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a visual representation for a persistence diagram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>xyz</strong> (<em>string</em>) – <ul>
+<li><p>Name for local file containing data on coordinates representing atoms in compound</p></li>
+</ul>
+</p></li>
+<li><p><strong>lifetime</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Option to set the y-axis to lifetime value</p></li>
+<li><dl class="simple">
+<dt>Option:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: set coordinates to (birth, death - birth)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: set coordinates to (birth, death)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>rips</strong> –</p>
+<ul class="simple">
+<li><p>See <a class="reference external" href="https://ripser.scikit-tda.org/reference/stubs/ripser.Rips.html#ripser.Rips.fit_transform">ripser documentation</a> for this return value.</p></li>
+<li><p>This object has the data specified in <cite>xyz</cite> fit to it.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><cite>Rips</cite> object from the ripser module</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="Element_PI.VariancePersist.html"
+       title="previous chapter">← Element_PI.VariancePersist</a>
+  </li>
+  <li class="next">
+    <a href="Element_PI.GeneratePI.html"
+       title="next chapter">Element_PI.Generate_PI →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+</div>
+            </div>
+          </div>
+      </page>
+    </div>
+    
+    
+  </body>
+</html>

@@ -1,0 +1,32 @@
+Element_PI.PersImage
+********************
+
+.. currentmodule:: Element_PI
+
+.. autoclass:: PersImage
+
+    .. automethod:: __init__
+
+    .. rubric:: Methods
+
+    .. autosummary:: 
+
+        ~PersImage.__init__
+        ~PersImage.transform
+        ~PersImage._transform
+        ~PersImage.weighting
+        ~PersImage.kernel
+        ~PersImage.to_landscape
+        ~PersImage.show
+
+    .. automethod:: transform
+
+    .. automethod:: weighting
+
+    .. automethod:: kernel
+
+    .. automethod:: to_landscape
+
+    .. automethod:: show
+
+
