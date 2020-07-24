@@ -101,8 +101,8 @@ First, we'll set the hyperparameter for our PD. The hyperparameter for
 the PD-generating function, ``PersDiagram`` are described below.
 
 1. ``Lifetime`` := Boolean value
-    -If you want to plot birth vs death on the PD, ``Lifetime = False``
-    -If you want to plot birth vs persistence on the PD, ``Lifetime = True``
+    - If you want to plot birth vs death on the PD, ``Lifetime = False``
+    - If you want to plot birth vs persistence on the PD, ``Lifetime = True``
 
 Next, we'll need to set the hyperparameters for our PI. The arguments and hyperparameters for 
 the PI-generating function, ``VariancePersist`` are described below.
