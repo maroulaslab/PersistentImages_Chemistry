@@ -92,10 +92,6 @@ class PersImage(TransformerMixin):
         - Determine which type of weighting function used, or pass in custom weighting function.
         - Currently only implements linear weighting.
 
-    Usage
-    -----
-
-
     """
 
     def __init__(

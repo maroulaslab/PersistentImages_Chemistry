@@ -174,6 +174,78 @@
             
   <div class="section" id="element-pi-variancepersist">
 <h1>Element_PI.VariancePersist<a class="headerlink" href="#element-pi-variancepersist" title="Permalink to this headline">¶</a></h1>
+<dl class="py method">
+<dt id="Element_PI.VariancePersist">
+<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">VariancePersist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pixelx</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">pixely</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">myspread</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">myspecs</span><span class="o">=</span><span class="default_value">{'maxBD': 2, 'minBD': 0}</span></em>, <em class="sig-param"><span class="n">showplot</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.VariancePersist" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Generate a persistence image given a file with coordinates of atoms.</dt><dd><p>Includes difference in electronegativity.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Filename</strong> (<em>string</em>) – <ul>
+<li><p>Name of file with chemical data to read</p></li>
+</ul>
+</p></li>
+<li><p><strong>pixelx</strong> (<em>int</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 100</p></li>
+<li><p>Number of pixels on x-axis</p></li>
+</ul>
+</p></li>
+<li><p><strong>pixely</strong> (<em>int</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 100</p></li>
+<li><p>Number of pixels on y-axis</p></li>
+</ul>
+</p></li>
+<li><p><strong>myspread</strong> (<em>int</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = 2</p></li>
+<li><p>Parameter for kernel</p></li>
+<li><p>For Gaussian kernel, this specifies the variance</p></li>
+</ul>
+</p></li>
+<li><p><strong>myspecs</strong> (<em>dictionary</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = <code class="docutils literal notranslate"><span class="pre">{&quot;maxBD&quot;:</span> <span class="pre">2,</span> <span class="pre">&quot;minBD&quot;:0}</span></code></p></li>
+<li><p>Specifies boundary extent in Angstroms</p></li>
+<li><p>Format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span><span class="p">,</span>
+    <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="o">&lt;</span><span class="nb">float</span><span class="o">&gt;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maxBD</span></code>: upper boundary of persistence image (in Angstroms)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">minBD</span></code>: lower boundary of persistence image (in Angstroms)</p></li>
+</ul>
+</p></li>
+<li><p><strong>showplot</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Default value = True</p></li>
+<li><dl class="simple">
+<dt>Options:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: plot the PI once generated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: do not plot the PI</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>img_array</strong> –</p>
+<ul class="simple">
+<li><p>One-dimensional vector representation of a persistence image</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Numpy array</p>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="section" id="example">
 <h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
 <p>The following example demonstrates how to create a persistence image based on chemical
@@ -215,7 +287,7 @@ data found in the <cite>compound.xyz</cite> file:</p>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2020, Jacob Townsend, Cassie P. Micucci, John H. Hymel, Vasileios Maroulas, Konstantinos D. Vogiatzis.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.2 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.1.1 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a>.
 </div>
             </div>
           </div>
