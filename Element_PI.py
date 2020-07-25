@@ -434,7 +434,7 @@ def VariancePersist(Filename, pixelx=100, pixely=100, myspread=2,
     return np.array(imgs.flatten())
 
 
-def PersDiagram(xyz, lifetime=True):
+def PersDiagram(xyz, lifetime=True, showplot = True):
     ''' Creates a visual representation for a persistence diagram
 
     Parameters
@@ -443,15 +443,22 @@ def PersDiagram(xyz, lifetime=True):
         - Name for local file containing data on coordinates representing atoms in compound
     lifetime: bool, optional
         - Option to set the y-axis to lifetime value
-        - Option:
+        - Options:
             - ``True``: set coordinates to (birth, death - birth)
             - ``False``: set coordinates to (birth, death)
+    showplot: bool, optional
+        - Option to output PD plot automatically to screen or not
+        - Options:
+            - ``True``: show plot
+            - ``False``: do not show plot
 
     Returns
     -------
     rips: `Rips` object from the ripser module
         - See `ripser documentation <https://ripser.scikit-tda.org/reference/stubs/ripser.Rips.html#>`_ for this return value.
         - This object has the data specified in `xyz` fit to it.
+
+    .. note:: If ``showplot = True``, then a plot of the PD will be output to the screen.
     '''
 
     plt.rcParams["font.family"] = "Times New Roman"
@@ -462,7 +469,7 @@ def PersDiagram(xyz, lifetime=True):
     rips = Rips()
     rips.transform(D, distance_matrix=True)
     rips.dgms_[0] = rips.dgms_[0][0:-1]
-    rips.plot(show=False, lifetime=lifetime, labels=['Connected Components','Holes'])
+    rips.plot(show = showplot, lifetime=lifetime, labels=['Connected Components','Holes'])
 
     L = plt.legend()
     plt.setp(L.texts, family="Times New Roman")

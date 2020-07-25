@@ -19,7 +19,7 @@ data on the atoms in the pyridine compound.::
 If we specify ``lifetime = True`` (as above), then our plot will look like the
 following. This plot represents the PD that is used to generate the PI.:
 
-.. image:: /../_images/persistdiagram_with_lifetime.png
+.. image:: /../_images/PD_with_lifetime.png
 
 If we specify ``lifetime = False``, then our plot will look slightly different.:
 
