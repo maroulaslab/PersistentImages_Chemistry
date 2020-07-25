@@ -176,7 +176,7 @@
 <h1>Element_PI.PersDiagram<a class="headerlink" href="#element-pi-persdiagram" title="Permalink to this headline">¶</a></h1>
 <dl class="py method">
 <dt id="Element_PI.PersDiagram">
-<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">PersDiagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersDiagram" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">Element_PI.</code><code class="sig-name descname">PersDiagram</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lifetime</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">showplot</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#Element_PI.PersDiagram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a visual representation for a persistence diagram</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -188,9 +188,21 @@
 <li><p><strong>lifetime</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
 <li><p>Option to set the y-axis to lifetime value</p></li>
 <li><dl class="simple">
-<dt>Option:</dt><dd><ul>
+<dt>Options:</dt><dd><ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: set coordinates to (birth, death - birth)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: set coordinates to (birth, death)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</p></li>
+<li><p><strong>showplot</strong> (<em>bool</em><em>, </em><em>optional</em>) – <ul>
+<li><p>Option to output PD plot automatically to screen or not</p></li>
+<li><dl class="simple">
+<dt>Options:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">True</span></code>: show plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">False</span></code>: do not show plot</p></li>
 </ul>
 </dd>
 </dl>
@@ -200,19 +212,41 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>rips</strong> –</p>
+<dd class="field-even"><p><ul>
+<li><p><strong>rips</strong> (<cite>Rips</cite> object from the ripser module) –</p>
 <ul class="simple">
 <li><p>See <a class="reference external" href="https://ripser.scikit-tda.org/reference/stubs/ripser.Rips.html#">ripser documentation</a> for this return value.</p></li>
 <li><p>This object has the data specified in <cite>xyz</cite> fit to it.</p></li>
 </ul>
+</li>
+<li><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">showplot</span> <span class="pre">=</span> <span class="pre">True</span></code>, then a plot of the PD will be output to the screen.</p>
+</div>
+</li>
+</ul>
 </p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><cite>Rips</cite> object from the ripser module</p>
 </dd>
 </dl>
 </dd></dl>
 
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In the example below, we will show how to create a persistence diagram and output
+it to the screen. We will use the file <code class="docutils literal notranslate"><span class="pre">babel/1.xyz</span></code> which contains coordinate
+data on the atoms in the pyridine compound.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Element_PI</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;babel/1.xyz&#39;</span>
+<span class="n">Element_PI</span><span class="o">.</span><span class="n">PersDiagram</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">lifetime</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">showplot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we specify <code class="docutils literal notranslate"><span class="pre">lifetime</span> <span class="pre">=</span> <span class="pre">True</span></code> (as above), then our plot will look like the
+following. This plot represents the PD that is used to generate the PI.:</p>
+<img alt="../_images/persistdiagram_with_lifetime.png" src="../_images/persistdiagram_with_lifetime.png" />
+<p>If we specify <code class="docutils literal notranslate"><span class="pre">lifetime</span> <span class="pre">=</span> <span class="pre">False</span></code>, then our plot will look slightly different.:</p>
+<img alt="../../_images/persistence_diagram_example.png" src="../../_images/persistence_diagram_example.png" />
+</div>
 </div>
 
 
