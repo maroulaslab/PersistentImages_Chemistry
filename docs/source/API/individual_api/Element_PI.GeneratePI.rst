@@ -12,7 +12,7 @@ Example
 =======
 In this example, we will generate a PI for the following molecule:
 
-.. image:: /../_images/GeneratePI_molecule_image
+.. image:: /../../_images/GeneratePI_molecule_image
 
 To generate this PI, we will set our filename and then call the ``GeneratePI`` function.::
 
@@ -24,5 +24,5 @@ To generate this PI, we will set our filename and then call the ``GeneratePI`` f
 
 The PI generated from this code is shown below:
 
-.. image:: /../_images/babel95_PI
+.. image:: /../../_images/babel95_PI
 
