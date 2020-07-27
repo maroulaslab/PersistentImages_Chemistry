@@ -20,7 +20,7 @@ You can download the original paper `here <https://www.nature.com/articles/s4146
    :caption: Tutorials
 
    pages/PI
-   /../../notebooks/VariancePersist
+   notebooks/VariancePersist
    
 
 .. toctree::
