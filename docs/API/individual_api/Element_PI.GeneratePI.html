@@ -252,6 +252,21 @@
 <p class="admonition-title">Note</p>
 <p>This function offers an alternative method to generate a PI that does not output the matrix-representation of the PI. Therefore, this should only be used for visualization purposes.</p>
 </div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we will generate a PI for the following molecule:</p>
+<img alt="../_images/GeneratePI_molecule_image" src="../_images/GeneratePI_molecule_image" />
+<p>To generate this PI, we will set our filename and then call the <code class="docutils literal notranslate"><span class="pre">GeneratePI</span></code> function.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">Element_PI</span>
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;babel/95.xyz&#39;</span>  <span class="c1"># This file included in original repository</span>
+<span class="n">Element_PI</span><span class="o">.</span><span class="n">GeneratePI</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">savefile</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">pixelx</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">pixely</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">myspread</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bounds</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;maxBD&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;minBD&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>The PI generated from this code is shown below:</p>
+<img alt="../_images/babel95_PI" src="../_images/babel95_PI" />
+</div>
 </div>
 
 
